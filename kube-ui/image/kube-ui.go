@@ -23,8 +23,8 @@ import (
 	"mime"
 	"net/http"
 
-	"github.com/GoogleCloudPlatform/kubernetes/pkg/ui/data/dashboard"
 	"github.com/golang/glog"
+	"github.com/kubernetes-ui/kube-ui/pkg/ui/data/dashboard"
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 )
@@ -41,11 +41,11 @@ func main() {
 	// makes it into all of our supported go versions.
 	mime.AddExtensionType(".svg", "image/svg+xml")
 
-	// Expose files in www/ on <host>
+	// Expose files in app/ on <host>
 	fileServer := http.FileServer(&assetfs.AssetFS{
 		Asset:    dashboard.Asset,
 		AssetDir: dashboard.AssetDir,
-		Prefix:   "www/app",
+		Prefix:   "app",
 	})
 	http.Handle("/", fileServer)
 

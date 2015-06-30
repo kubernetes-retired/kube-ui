@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: kube-ui
-        image: gcr.io/google_containers/kube-ui:v1
+        image: gcr.io/kube-ui/kube-ui:dev
         ports:
         - containerPort: 8080
