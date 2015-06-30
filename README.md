@@ -5,7 +5,7 @@ This document explains how to work with the Kubernetes UI. For information on ho
 There are two kinds of dependencies in the UI project: tools and frameworks. The tools help
 us manage and test the application. They are not part of the application. The frameworks, on the other hand, become part of the application, as described below.
 
-* We get the tools via `npm`, the [node package manager](https://www.npmjs.com/). 
+* We get the tools via `npm`, the [node package manager](https://www.npmjs.com/).
 * We get the frameworks via `bower`, a [client-side package manager](http://bower.io/).
 
 Before you build the application for the first time, run this command from the `www/master` directory:
@@ -71,15 +71,15 @@ Like `npm start`, it runs `bower install` to install and/or update the framework
 To make the production code available to the Kubernetes api server, run this command from the top level directory:
 
 ```
-hack/build-ui.sh
+hack/build-ui.sh dashboard
 ```
 
-It runs the `go-bindata` tool to package the generated `app` directory and other user interface content, such as the Swagger documentation, into `pkg/ui/datafile.go`. Note: go-bindata can be installed with `go get github.com/jteeuwen/go-bindata/...`.
+It runs the `go-bindata` tool to package the generated `app` directory and other user interface content, such as the Swagger documentation, into `pkg/ui/data/dashboard/datafile.go`. Note: go-bindata can be installed with `go get github.com/jteeuwen/go-bindata/...`.
 
-Then, run one of the go build scripts, such as `hack/build-go.sh`, to build a new `kube-apiserver` binary that includes the updated `pkg/ui/datafile.go`.
+Then, run `make kube-ui` in the `cluster/addons/kube-ui/image` directory to build a new `kube-ui` binary that includes the updated `datafile.go`. When the updated UI is ready for release, increment the version tag in `cluster/addons/kube-ui/image/Makefile` and run `make push` in the same directory to build & push the new kube-ui docker image.
 
 ### Serving the app in production
-The app is served in production by `kube-apiserver` at:
+The app is served in production by the `kube-ui` binary at:
 
 ```
 https://<kubernetes-master>/ui/
@@ -88,7 +88,7 @@ https://<kubernetes-master>/ui/
 which redirects to:
 
 ```
-https://<kubernetes-master>/static/app/
+https://<kubernetes-master>/api/v1/proxy/namespaces/default/services/kube-ui/
 ```
 
 ## Configuration
@@ -139,8 +139,8 @@ Currently, the UI project includes both unit-testing with [Karma](http://karma-r
 ### Unit testing with Karma
 To run the existing Karma tests:
 
-* Install the Karma CLI (Note: it needs to be installed globally, so the `sudo` below may be needed. The other Karma packages, such as `karma`, `karma-jasmine`, and `karma-chrome-launcher,` should be installed automatically by the build). 
- 
+* Install the Karma CLI (Note: it needs to be installed globally, so the `sudo` below may be needed. The other Karma packages, such as `karma`, `karma-jasmine`, and `karma-chrome-launcher,` should be installed automatically by the build).
+
 ```
 sudo npm install -g karma-cli
 ```
