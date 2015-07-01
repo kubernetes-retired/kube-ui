@@ -57,6 +57,7 @@ network_closure.sh
 master/node_modules/
 master/npm-debug.log
 master/shared/config/development.json
+npm-debug.log
 
 # Karma output
 test_out
