@@ -14,11 +14,10 @@ module.exports = function(config) {
       '../third_party/ui/bower_components/lodash/dist/lodash.js',
       'app/assets/js/app.js',
       'app/assets/js/base.js',
-      'app/shared/**/*.js',
       'app/vendor/**/*.js',
-      'master/shared/**/*.js',
       'master/test/**/*.js',
-      'master/components/**/test/**/*.js'
+      'master/components/**/test/**/*.js',
+      'app/**/img/**/*.*'
     ],
 
     autoWatch: true,
