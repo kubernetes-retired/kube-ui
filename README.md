@@ -176,3 +176,6 @@ To run new protractor tests for a component, put new `*.spec.js` files in the ap
 To test the chrome, put new `*.spec.js` files under the `master/protractor/chrome` directory.
 
 [![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/www/README.md?pixel)]()
+
+
+test cla bot
