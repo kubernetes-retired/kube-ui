@@ -78,7 +78,7 @@ https://<kubernetes-master>/ui/
 which redirects to:
 
 ```
-https://<kubernetes-master>/static/app/
+https://<kubernetes-master>/api/v1/proxy/namespaces/kube-system/services/kube-ui/
 ```
 
 ## Configuration
