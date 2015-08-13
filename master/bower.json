@@ -1,8 +1,8 @@
 {
-  "name": "kubernetes-ui",
+  "name": "kube-ui",
   "description": "UI for Kubernetes",
   "version": "0.0.0",
-  "homepage": "https://github.com/kubernetes-ui/kubernetes-ui",
+  "homepage": "https://github.com/kubernetes/kube-ui",
   "license": "Apache",
   "private": true,
   "dependencies": {
