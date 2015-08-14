@@ -45,7 +45,7 @@ func main() {
 	fileServer := http.FileServer(&assetfs.AssetFS{
 		Asset:    data.Asset,
 		AssetDir: data.AssetDir,
-		Prefix:   "www/app",
+		Prefix:   "app",
 	})
 	http.Handle("/", fileServer)
 
