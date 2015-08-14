@@ -2,10 +2,10 @@
   "use strict";
 
   angular.module('kubernetesApp.services')
-      .service('cAdvisorService', function($http, $q, ENV) {
+      .service('cAdvisorService', function($http, $q, ENV, k8sApi) {
         var _baseUrl = function(minionIp) {
           var minionPort = ENV['/']['cAdvisorPort'] || "8081";
-          var proxy = ENV['/']['cAdvisorProxy'] || "/api/v1/proxy/nodes/";
+          var proxy = ENV['/']['cAdvisorProxy'] || (k8sApi.getUrlBase() + "/proxy/nodes/");
 
           return proxy + minionIp + ':' + minionPort + '/api/v1.0/';
         };
