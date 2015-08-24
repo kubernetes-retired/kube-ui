@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('pods', []).service('podService', PodDataService);
+  angular.module('pods', []).service('podService', ['$q', PodDataService]);
 
   /**
    * Pod DataService

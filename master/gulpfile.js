@@ -65,7 +65,6 @@ var source = {
       'js/app.directive.js',
       'js/app.run.js',
       'js/app.service.js',
-      'js/app.provider.js',
       'js/tabs.js',
       'js/sections.js',
       'shared/config/generated-config.js',
@@ -234,10 +233,7 @@ gulp.task('scripts:app:base', function() {
       .pipe(useSourceMaps ? sourcemaps.init() : gutil.noop())
       .pipe(concat(source.scripts.dest.name))
       .pipe(ngAnnotate())
-      // Now that we run a production build, uglification is breaking angular injection, 
-      // so disable it for now.
-      // TODO: Find out which dependencies are not string based and upgrade them accordingly.
-      // .pipe(isProduction ? uglify({preserveComments: 'some'}) : gutil.noop())
+      .pipe(isProduction ? uglify({preserveComments: 'some'}) : gutil.noop())
       .pipe(useSourceMaps ? sourcemaps.write() : gutil.noop())
       .pipe(gulp.dest(source.scripts.dest.dir))
       .on("error", handleError);

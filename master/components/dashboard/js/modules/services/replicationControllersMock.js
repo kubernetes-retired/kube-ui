@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('replicationControllers', [])
-      .service('replicationControllerService', ReplicationControllerDataService);
+      .service('replicationControllerService', ['$q', ReplicationControllerDataService]);
 
   /**
    * Replication Controller DataService

@@ -39,20 +39,17 @@ app.controller('cAdvisorController', [
               });
 
             },
-            function(errorData) {
+            function() {
               // console.log("Error: " + errorData);
               $scope.loading = false;
             });
 
         $scope.loading = false;
-      })).error(angular.bind(this, this.handleError));
+      })).finally(function() {
+        $scope.loading = false;
+      });
     };
-
-    function handleError(data, status, headers, config) {
-      // console.log("Error (" + status + "): " + data);
-      $scope.loading = false;
-    };
-
+    
     // d3
     function getColorForIndex(i, percentage) {
       // var colors = ['red', 'blue', 'yellow', 'pink', 'purple', 'green', 'orange'];

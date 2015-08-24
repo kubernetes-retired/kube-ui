@@ -1,5 +1,5 @@
 app.run(['$route', angular.noop])
-    .run(function(lodash) {
+    .run(['lodash', function(lodash) {
       // Alias lodash
       window['_'] = lodash;
-    });
+    }]);
