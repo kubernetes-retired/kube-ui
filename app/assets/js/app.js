@@ -377,10 +377,10 @@ app.controller('TabCtrl', [
   "use strict";
 
   angular.module('kubernetesApp.services')
-      .service('cAdvisorService', ["$http", "$q", "ENV", function($http, $q, ENV) {
+      .service('cAdvisorService', ["$http", "$q", "ENV", "k8sApi", function($http, $q, ENV, k8sApi) {
         var _baseUrl = function(minionIp) {
           var minionPort = ENV['/']['cAdvisorPort'] || "8081";
-          var proxy = ENV['/']['cAdvisorProxy'] || "/api/v1/proxy/nodes/";
+          var proxy = ENV['/']['cAdvisorProxy'] || (k8sApi.getUrlBase() + "/proxy/nodes/");
 
           return proxy + minionIp + ':' + minionPort + '/api/v1.0/';
         };
@@ -569,7 +569,11 @@ app.controller('TabCtrl', [
       }]);
 })();
 
-app.provider('k8sApi',
+(function() {
+  "use strict";
+
+  angular.module('kubernetesApp.services')
+    .provider('k8sApi',
              function() {
 
                var urlBase = '';
@@ -593,30 +597,47 @@ app.provider('k8sApi',
                this.$get = ["$http", "$q", function($http, $q) {
                  var api = {};
 
-                 api.getUrlBase = function() { return urlBase + '/namespaces/' + _namespace; };
+                 api.getUrlBase = function() { return urlBase; };
 
-                 api.getPods = function(query) { return _get($http, api.getUrlBase() + '/pods', query); };
+                 api.getNamespacedUrlBase = function() { return urlBase + '/namespaces/' + _namespace; };
+
+                 api.getPods = function(query) { return _get($http, api.getNamespacedUrlBase() + '/pods', query); };
 
                  api.getNodes = function(query) { return _get($http, urlBase + '/nodes', query); };
 
                  api.getMinions = api.getNodes;
 
-                 api.getServices = function(query) { return _get($http, api.getUrlBase() + '/services', query); };
+                 api.getServices = function(query) { return _get($http, api.getNamespacedUrlBase() + '/services', query); };
 
                  api.getReplicationControllers = function(query) {
-                   return _get($http, api.getUrlBase() + '/replicationcontrollers', query)
+                   return _get($http, api.getNamespacedUrlBase() + '/replicationcontrollers', query)
                  };
 
-                 api.getEvents = function(query) { return _get($http, api.getUrlBase() + '/events', query); };
+                 api.getEvents = function(query) { return _get($http, api.getNamespacedUrlBase() + '/events', query); };
 
                  return api;
                }];
              })
     .config(["k8sApiProvider", "ENV", function(k8sApiProvider, ENV) {
       if (ENV && ENV['/'] && ENV['/']['k8sApiServer']) {
-        k8sApiProvider.setUrlBase(ENV['/']['k8sApiServer']);
+        var base = ENV['/']['k8sApiServer']
+
+        if (base[0] == '/') {
+          // try to find the k8sApiServer location in the current path, falling
+          // back to <k8sApiServer> if not found:
+          // e.g.: /some/prefix/api/v1/proxy/.../kube-ui => /some/prefix/api/v1
+          //       /kube-ui                              => /api/v1
+          //       /a/api/v1/b/api/v1/.../kube-ui        => /a/api/v1/b/api/v1
+          var i = window.location.pathname.lastIndexOf(base)
+          if (i != -1) {
+            base = window.location.pathname.substr(0, i + base.length)
+          }
+        }
+
+        k8sApiProvider.setUrlBase(base);
       }
     }]);
+})();
 
 (function() {
   "use strict";
