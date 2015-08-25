@@ -1,1 +1,6 @@
-app.value("tabs", [{"component":"dashboard","title":"Dashboard"}]);
+app.value('tabs', [
+		{
+			component: 'dashboard',
+			title: 'Dashboard'
+		}
+]);
