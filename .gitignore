@@ -68,3 +68,7 @@ doc_tmp/
 
 # binaries
 kube-ui
+
+# artifacts
+master/npm-11278-00d1fb62/
+master/phantomjs/
