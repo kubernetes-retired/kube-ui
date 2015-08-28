@@ -1,3 +1,6 @@
+
+Join the UI discussion at: https://groups.google.com/forum/#!forum/kubernetes-sig-ui
+
 # Working with the Kubernetes UI
 This document explains how to work with the Kubernetes UI. For information on how to access and use it, see [docs/ui.md](docs/ui.md).
 
