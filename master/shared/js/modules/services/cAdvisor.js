@@ -42,30 +42,47 @@
           return deferred.promise;
         }
 
-        this.getDataForMinion = function(minionIp) {
+        this.getDataForMinion = function(minionIp, isAvailable) {
           var machineData, containerData;
           var deferred = $q.defer();
 
-          var p = $q.all([getMachineInfo(minionIp), getContainerInfo(minionIp)])
-                      .then(
-                          function(dataArray) {
-                            machineData = dataArray[0];
-                            containerData = dataArray[1];
+          if(isAvailable) {
+            var p = $q.all([getMachineInfo(minionIp), getContainerInfo(minionIp)])
+                        .then(
+                            function(dataArray) {
+                              machineData = dataArray[0];
+                              containerData = dataArray[1];
 
-                            var memoryData = parseMemory(machineData, containerData);
-                            var cpuData = parseCpu(machineData, containerData);
-                            var fsData = parseFilesystems(machineData, containerData);
-                            deferred.resolve({
-                              memoryData: memoryData,
-                              cpuData: cpuData,
-                              filesystemData: fsData,
-                              machineData: machineData,
-                              containerData: containerData
-                            });
+                              var memoryData = parseMemory(machineData, containerData);
+                              var cpuData = parseCpu(machineData, containerData);
+                              var fsData = parseFilesystems(machineData, containerData);
+                              deferred.resolve({
+                                memoryData: memoryData,
+                                cpuData: cpuData,
+                                filesystemData: fsData,
+                                machineData: machineData,
+                                containerData: containerData
+                              });
 
-                          },
-                          function(errorData) { deferred.reject(errorData); });
+                            },
+                            function(errorData) { deferred.reject(errorData); });
 
+
+          } else {
+            deferred.resolve({
+              memoryData: {
+                current: {
+                    memoryUsage: '',
+                    memoryLimit: ''
+                },
+                historical: {}
+              },
+              cpuData: { cpuPercentUsage: 0 },
+              filesystemData: [],
+              machineData: {},
+              containerData: {}
+            });
+          }
           return deferred.promise;
         };
 
