@@ -1,0 +1,30 @@
+language: node_js
+sudo: false
+node_js:
+- '0.12'
+
+cache:
+  directories:
+    - master/node_modules
+
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+install:
+  # Update npm
+  - npm install -g npm@2.9.1
+  - npm --version
+  - cd master 
+  - npm install
+  # todo: activate next line when E2E tests are fixed
+  # - ./node_modules/.bin/webdriver-manager update
+
+script:
+- npm run build
+# run unit tests
+- ./node_modules/.bin/karma start karma.conf.js --singleRun=true --autoWatch=false
+# todo: fix E2E tests
+# - cd ../app && ../master/node_modules/.bin/http-server -p 8000 &
+# - cd ../master && node_modules/.bin/protractor protractor/conf.js

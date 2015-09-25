@@ -132,18 +132,12 @@ Currently, the UI project includes both unit-testing with [Karma](http://karma-r
 ### Unit testing with Karma
 To run the existing Karma tests:
 
-* Install the Karma CLI (Note: it needs to be installed globally, so the `sudo` below may be needed. The other Karma packages, such as `karma`, `karma-jasmine`, and `karma-chrome-launcher,` should be installed automatically by the build). 
- 
-```
-sudo npm install -g karma-cli
-```
-
 * Edit the Karma configuration in `master/karma.config.js`, if necessary.
 * Run the tests. The console should show the test results.
 
 ```
 cd master
-karma start karma.conf.js
+node node_modules/.bin/karma start karma.conf.js
 ```
 
 To run new Karma tests for a component, put new `*.spec.js` files under the appropriate `master/components/**/test/modules/*` directories.

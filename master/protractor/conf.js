@@ -1,4 +1,10 @@
 exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['chrome/**/*.js', '../components/**/protractor/*.js']
+  specs: [
+    'chrome/**/*.js',
+    '../components/**/protractor/*.js'
+  ],
+
+   capabilities: {
+       browserName: 'chrome'
+  }
 };
