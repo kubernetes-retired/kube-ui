@@ -20,7 +20,7 @@ app.controller('cAdvisorController', [
       k8sApi.getMinions().success(angular.bind(this, function(res) {
 
         $scope.minions = res;
-         console.log(res);
+
         var promises = lodash.map(res.items, function(m) {
             return cAdvisorService.getDataForMinion(m.metadata.name, (m.status.conditions[0].status === 'True'));
           });
