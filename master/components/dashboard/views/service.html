@@ -83,6 +83,11 @@
           </tr>
 
           <tr>
+            <td class="name">Namespace</td>
+            <td class="value">{{service.metadata.namespace}}</td>
+          </tr>
+
+          <tr>
             <td class="name">Related Pods</td>
             <td class="value">
               <div ng-show="service.spec.selector && Object.keys(service.spec.selector).length > 1">

@@ -2,19 +2,18 @@
  * Module: Replication
  * Visualizer for replication controllers
  =========================================================*/
-(function() {
-	function Replicationcontroller() {
+	function ReplicationController() {
 	}
 
-	Replicationcontroller.prototype.getdata = function(dataid) {
+	ReplicationController.prototype.getData = function(dataid, namespaceId) {
 		this.scope.loading = true;
-		this.k8sapi.getreplicationcontrollers(dataid).success(angular.bind(this, function(data) {
-			this.scope.replicationcontroller = data;
+		this.k8sApi.getReplicationControllers(dataid, namespaceId).success(angular.bind(this, function(data) {
+			this.scope.replicationController = data;
 			this.scope.loading = false;
 		})).error(angular.bind(this, this.handleError));
 	};
 
-	Replicationcontroller.prototype.handleError = function(data, status, headers, config) {
+	ReplicationController.prototype.handleError = function(data, status, headers, config) {
 		console.log("error (" + status + "): " + data);
 		this.scope.loading = false;
 	};
@@ -27,11 +26,10 @@
 			$scope.controller = new ReplicationController();
 			$scope.controller.k8sApi = k8sApi;
 			$scope.controller.scope = $scope;
-			$scope.controller.getData($routeParams.replicationControllerId);
+			$scope.controller.getData($routeParams.replicationControllerId, $routeParams.namespaceId);
 
 			$scope.doTheBack = function() { window.history.back(); };
 			$scope.getSelectorUrlFragment = function(sel){ return _.map(sel, function(v, k) { return k + '=' + v }).join(','); };
 
 		}
 	]);
-})();

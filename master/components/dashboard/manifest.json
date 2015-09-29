@@ -33,12 +33,12 @@
     },
     {
       "description": "Replication Controller",
-      "url": "/replicationcontrollers/:replicationControllerId",
+      "url": "/replicationcontrollers/:namespaceId/:replicationControllerId",
       "templateUrl": "components/dashboard/views/replication.html"
     },
     {
       "description": "Service",
-      "url": "/services/:serviceId",
+      "url": "/services/:namespaceId/:serviceId",
       "templateUrl": "components/dashboard/views/service.html"
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "description": "Pod",
-      "url": "/pods/:podId",
+      "url": "/pods/:namespaceId/:podId",
       "templateUrl": "components/dashboard/views/pod.html"
     }
   ]

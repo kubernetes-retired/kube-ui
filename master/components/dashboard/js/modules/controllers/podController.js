@@ -20,14 +20,14 @@ app.controller('PodCtrl', [
       $scope_.loading = false;
     };
 
-    $scope.handlePod = function(podId) {
+    $scope.handlePod = function(podId, namespaceId) {
       $scope.loading = true;
-      k8sApi.getPods(podId).success(angular.bind(this, function(data) {
+      k8sApi.getPods(podId, namespaceId).success(angular.bind(this, function(data) {
         $scope.pod = data;
         $scope.loading = false;
       })).error($scope.handleError);
     };
 
-    $scope.handlePod($routeParams.podId);
+    $scope.handlePod($routeParams.podId, $routeParams.namespaceId);
   }
 ]);
