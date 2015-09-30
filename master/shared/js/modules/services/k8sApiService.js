@@ -29,13 +29,10 @@
                  api.getUrlBase = function() { return urlBase; };
 
                  api.getNamespacedUrlBase = function(namespace) {
-                   var ns = '';
-
-                   if (namespace !== undefined) { ns = namespace; }
-                   else if(_namespace !== undefined) { ns = _namespace; }
-                   else { return urlBase; }
-
-                   return urlBase + '/namespaces/' + ns;
+                   var ns = namespace || _namespace;
+                   return ns ?
+                       urlBase + '/namespaces/' + ns :
+                       urlBase;
                  };
 
                  api.getPods = function(query, namespace) { return _get($http, api.getNamespacedUrlBase(namespace) + '/pods', query); };
