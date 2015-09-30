@@ -18,10 +18,12 @@ app.controller('cAdvisorController', [
       $scope.loading = true;
 
       k8sApi.getMinions().success(angular.bind(this, function(res) {
-        $scope.minions = res;
-        // console.log(res);
-        var promises = lodash.map(res.items, function(m) { return cAdvisorService.getDataForMinion(m.metadata.name); });
 
+        $scope.minions = res;
+
+        var promises = lodash.map(res.items, function(m) {
+            return cAdvisorService.getDataForMinion(m.metadata.name, (m.status.conditions[0].status === 'True'));
+          });
         $q.all(promises).then(
             function(dataArray) {
               lodash.each(dataArray, function(data, i) {
@@ -29,8 +31,6 @@ app.controller('cAdvisorController', [
 
                 var maxData = maxMemCpuInfo(m.metadata.name, data.memoryData, data.cpuData, data.filesystemData);
 
-                // console.log("maxData", maxData);
-                var hostname = "";
                 if(m.status.addresses)
                   hostname = m.status.addresses[0].address;
 
@@ -49,7 +49,7 @@ app.controller('cAdvisorController', [
         $scope.loading = false;
       });
     };
-    
+
     // d3
     function getColorForIndex(i, percentage) {
       // var colors = ['red', 'blue', 'yellow', 'pink', 'purple', 'green', 'orange'];
