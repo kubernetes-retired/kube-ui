@@ -19,7 +19,7 @@ app.controller('ListServicesCtrl', [
       {name: 'Labels', field: 'labels'},
       {name: 'Selector', field: 'selector'},
       {name: 'IP', field: 'ip'},
-      {name: 'Ports', field: 'port'}
+      {name: 'Namespace', field: 'namespace'}
     ];
 
     $scope.custom = {
@@ -27,12 +27,13 @@ app.controller('ListServicesCtrl', [
       ip: 'grey',
       selector: 'grey',
       port: 'grey',
-      labels: 'grey'
+      labels: 'grey',
+      namespace: 'grey'
     };
-    $scope.sortable = ['name', 'ip', 'port'];
+    $scope.sortable = ['name', 'ip', 'port', 'namespace'];
     $scope.count = 10;
 
-    $scope.go = function(data) { $location.path('/dashboard/services/' + data.name); };
+    $scope.go = function(data) { $location.path('/dashboard/services/' + data.namespace + '/' + data.name); };
 
     $scope.content = [];
 
@@ -96,7 +97,8 @@ app.controller('ListServicesCtrl', [
               ip: service.spec.portalIP,
               port: _ports,
               selector: _selectors,
-              labels: _labels
+              labels: _labels,
+              namespace: service.metadata.namespace
             });
           });
         }

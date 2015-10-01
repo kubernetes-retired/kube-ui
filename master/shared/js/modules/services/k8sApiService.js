@@ -6,7 +6,7 @@
              function() {
 
                var urlBase = '';
-               var _namespace = 'default';
+               var _namespace = undefined;
 
                this.setUrlBase = function(value) { urlBase = value; };
 
@@ -28,18 +28,23 @@
 
                  api.getUrlBase = function() { return urlBase; };
 
-                 api.getNamespacedUrlBase = function() { return urlBase + '/namespaces/' + _namespace; };
+                 api.getNamespacedUrlBase = function(namespace) {
+                   var ns = namespace || _namespace;
+                   return ns ?
+                       urlBase + '/namespaces/' + ns :
+                       urlBase;
+                 };
 
-                 api.getPods = function(query) { return _get($http, api.getNamespacedUrlBase() + '/pods', query); };
+                 api.getPods = function(query, namespace) { return _get($http, api.getNamespacedUrlBase(namespace) + '/pods', query); };
 
                  api.getNodes = function(query) { return _get($http, urlBase + '/nodes', query); };
 
                  api.getMinions = api.getNodes;
 
-                 api.getServices = function(query) { return _get($http, api.getNamespacedUrlBase() + '/services', query); };
+                 api.getServices = function(query, namespace) { return _get($http, api.getNamespacedUrlBase(namespace) + '/services', query); };
 
-                 api.getReplicationControllers = function(query) {
-                   return _get($http, api.getNamespacedUrlBase() + '/replicationcontrollers', query)
+                 api.getReplicationControllers = function(query, namespace) {
+                   return _get($http, api.getNamespacedUrlBase(namespace) + '/replicationcontrollers', query);
                  };
 
                  api.getEvents = function(query) { return _get($http, api.getNamespacedUrlBase() + '/events', query); };

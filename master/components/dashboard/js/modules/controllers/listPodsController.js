@@ -21,6 +21,7 @@ app.controller('ListPodsCtrl', [
       {name: 'Status', field: 'status'},
       {name: 'Containers', field: 'containers'},
       {name: 'Images', field: 'images'},
+      {name: 'Namespace', field: 'namespace'},
       {name: 'Host', field: 'host'},
       {name: 'Labels', field: 'labels'}
     ];
@@ -37,7 +38,7 @@ app.controller('ListPodsCtrl', [
     $scope.sortable = ['pod', 'ip', 'status'];
     $scope.count = 10;
 
-    $scope.go = function(data) { $location.path('/dashboard/pods/' + data.pod); };
+    $scope.go = function(data) { $location.path('/dashboard/pods/' + data.namespace + '/' + data.pod); };
 
     var orderedPodNames = [];
 
@@ -93,7 +94,8 @@ app.controller('ListPodsCtrl', [
             images: _fixComma(_images),
             host: pod.spec.host,
             labels: _fixComma(_labels) + ':' + _fixComma(_uses),
-            status: pod.status.phase
+            status: pod.status.phase,
+            namespace: pod.metadata.namespace
           });
 
         });

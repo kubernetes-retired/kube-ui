@@ -22,7 +22,8 @@ app.controller('ListReplicationControllersCtrl', [
       {name: 'Containers', field: 'containers'},
       {name: 'Images', field: 'images'},
       {name: 'Selector', field: 'selector'},
-      {name: 'Replicas', field: 'replicas'}
+      {name: 'Replicas', field: 'replicas'},
+      {name: 'Namespace', field: 'namespace'}
     ];
 
     $scope.custom = {
@@ -30,13 +31,14 @@ app.controller('ListReplicationControllersCtrl', [
       containers: 'grey',
       images: 'grey',
       selector: 'grey',
-      replicas: 'grey'
+      replicas: 'grey',
+      namespace: 'grey'
     };
-    $scope.sortable = ['controller', 'containers', 'images'];
+    $scope.sortable = ['controller', 'containers', 'images', 'namespace'];
     $scope.thumbs = 'thumb';
     $scope.count = 10;
 
-    $scope.go = function(data) { $location.path('/dashboard/replicationcontrollers/' + data.controller); };
+    $scope.go = function(data) { $location.path('/dashboard/replicationcontrollers/' + data.namespace + '/' + data.controller); };
 
     function handleError(data, status, headers, config) {
       console.log("Error (" + status + "): " + data);
@@ -81,7 +83,8 @@ app.controller('ListReplicationControllersCtrl', [
             containers: _name,
             images: _image,
             selector: _selectors,
-            replicas: replicationController.status.replicas
+            replicas: replicationController.status.replicas,
+            namespace: replicationController.metadata.namespace
           });
 
         });

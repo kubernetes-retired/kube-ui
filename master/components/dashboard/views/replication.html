@@ -56,6 +56,11 @@
           </tr>
 
           <tr>
+            <td class="name">Namespace</td>
+            <td class="value">{{replicationController.metadata.namespace}}</td>
+          </tr>
+
+          <tr>
             <td class="name">Related Pods</td>
             <td class="value">
               <div ng-show="replicationController.spec.selector && Object.keys(replicationController.spec.selector).length > 1">
