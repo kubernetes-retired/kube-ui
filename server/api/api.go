@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"github.com/kubernetes/kube-ui/server/datastore"
 	"github.com/kubernetes/kube-ui/server/proxypool"
@@ -89,11 +88,9 @@ func (c *Context) ReadJSON(v interface{}) error {
 	return nil
 }
 
-func SetupRouter(c *BaseContext) http.Handler {
+func SetupRouter(c *BaseContext) *mux.Router {
 	// setup routes
 	router := mux.NewRouter()
-
-	n := negroni.New(negroni.NewRecovery())
 
 	// kube-ui related routes
 	router.HandleFunc("/api/clusters", handleFuncWithContext(listClusterHandler, c)).Methods("GET")
@@ -103,8 +100,7 @@ func SetupRouter(c *BaseContext) http.Handler {
 	// kubernetes proxy handler
 	router.HandleFunc("/api/clusters/{uid}/proxy/{rest:.*}", handleFuncWithContext(kubernetesProxyHandler, c))
 	router.HandleFunc("/api/clusters/{uid}/proxy", handleFuncWithContext(kubernetesProxyHandler, c))
-	n.UseHandler(router)
-	return n
+	return router
 }
 
 func handleFuncWithContext(h func(*Context), b *BaseContext) http.HandlerFunc {

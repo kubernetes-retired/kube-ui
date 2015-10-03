@@ -5,6 +5,7 @@ dist/
 src/css/
 src/bower_components/
 .tmp/
+*.db
 
 # binaries
 kube-ui

@@ -20,14 +20,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/kubernetes/kube-ui/server/api"
-	"github.com/kubernetes/kube-ui/server/datastore"
-	"github.com/kubernetes/kube-ui/server/datastore/boltdb"
-	"github.com/kubernetes/kube-ui/server/proxypool"
 	"log"
 	"mime"
 	"net/http"
 	"os"
+
+	"github.com/codegangsta/negroni"
+	"github.com/elazarl/go-bindata-assetfs"
+	"github.com/kubernetes/kube-ui/server/api"
+	"github.com/kubernetes/kube-ui/server/data"
+	"github.com/kubernetes/kube-ui/server/datastore"
+	"github.com/kubernetes/kube-ui/server/datastore/boltdb"
+	"github.com/kubernetes/kube-ui/server/proxypool"
 )
 
 // cli flags
@@ -82,21 +86,21 @@ func main() {
 		Datastore: store,
 		ProxyPool: pool,
 	})
+	n := negroni.New(negroni.NewRecovery())
+	n.UseHandler(router)
 
 	// Send correct mime type for .svg files.  TODO: remove when
 	// https://github.com/golang/go/commit/21e47d831bafb59f22b1ea8098f709677ec8ce33
 	// makes it into all of our supported go versions.
 	mime.AddExtensionType(".svg", "image/svg+xml")
 
-	// Expose files in www/ on <host>
-	// fileServer := http.FileServer(&assetfs.AssetFS{
-	// 	Asset:    data.Asset,
-	// 	AssetDir: data.AssetDir,
-	// 	Prefix:   "app",
-	// })
-	// http.Handle("/", fileServer)
+	fileServer := http.FileServer(&assetfs.AssetFS{
+		Asset:    data.Asset,
+		AssetDir: data.AssetDir,
+	})
+	router.PathPrefix("/").Handler(fileServer)
 
 	listenAddr := fmt.Sprintf("%s:%d", *insecureBindAddress, *insecurePort)
 	log.Println("Kube-UI listening on:", listenAddr)
-	log.Fatal("Error ListenAndServe:", http.ListenAndServe(listenAddr, router))
+	log.Fatal("Error ListenAndServe:", http.ListenAndServe(listenAddr, n))
 }
