@@ -1,3 +1,4 @@
+# Kube-UI - The web UI for Kubernetes
 
 Join the UI discussion at: https://groups.google.com/forum/#!forum/kubernetes-sig-ui
 
@@ -9,15 +10,15 @@ There are two kinds of dependencies in the UI project: tools and frameworks. The
 us manage and test the application. They are not part of the application. The frameworks, on the other hand, become part of the application, as described below.
 
 * We get the tools via `npm`, the [node package manager](https://www.npmjs.com/). 
-* We get the frameworks via `bower`, a [client-side package manager](http://bower.io/).
 
-Before you build the application for the first time, run this command from the `master` directory:
+Before you build the application for the first time, run this command from the root directory:
 
 ```
 npm install
+bower install
 ```
 
-It creates a new directory, `master/node_modules`, which contains the tool dependencies.
+It creates a new directory, `node_modules`, which contains the tool dependencies.
 
 ## Building and serving the app
 
@@ -30,10 +31,7 @@ npm start
 
 It runs `bower install` to install and/or update the framework dependencies, and then `gulp`, a [JavaScript build system](http://gulpjs.com/), to generate a development version of the application.
 
-Bower creates a new directory, `third_party/ui/bower_components`, which contains the framework dependencies. Each of them should be referenced in one of the `vendor.json` files below:
-
-* `master/vendor.base.json` - 3rd party vendor javascript files required to start the app. All of the dependencies referenced by this file are compiled into `base.js` and loaded before `app.js`.
-* `master/vendor.json` - 3rd party vendor js or css files required to make the app work, usually by lazy loading. All of the dependencies referenced by this file are compiled into `app/vendor`. (Note: some framework dependencies have been hand edited and checked into source control under `master/shared/vendor`.)
+Bower creates a new directory, `src/bower_components`, which contains the framework dependencies.
 
 The default `gulp` target builds the application for development (e.g., without uglification of js files or minification of css files), and then starts a file watcher that rebuilds the generated files every time the source files are updated. (Note: the file watcher does not support adding or deleting files. It must be stopped and restarted to pick up additions or deletions).
 

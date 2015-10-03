@@ -1,0 +1,71 @@
+.k8s-navbar {
+  padding: 0px 10px 0px 0px;
+  height: $navbar-height;
+  font-size: 16px;
+
+  .navbar-nav {
+    > li > a:hover,
+    > li > a:focus,
+    > li.active > a {
+      border-bottom: 3px #09c1d1 solid;
+      padding-bottom: 23.5px;
+    }
+  }
+
+  .navbar-nav > li > a,
+  .navbar-text {
+      text-shadow: 1px 1px 1px #485A90;
+  }
+
+  .label {
+    font-size: inherit;
+    background-color: lighten($navbar-background-color, 50);
+    color: $navbar-background-color;
+    text-shadow: none;
+  }
+
+  > .k8s-cluster-namespace-switch {
+    background-color: #326DE6;
+    color: #fff;
+    height: $navbar-height;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    padding-top: 10px;
+  }
+
+  > .k8s-logo-container {
+    width: 233px;
+    padding-left: 10px;
+    font-weight: bold;
+    background: #fff;
+    padding-top: $navbar-height/3.3;
+    height: $navbar-height;
+    width: 250px;
+
+    a {
+      color: #326DE6;
+      font-size: 24px;
+      
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        background-color: #fff;
+      }
+    }
+  }
+
+  .k8s-logo {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    margin-top: -5px;
+    margin-right: 5px;
+  }
+
+  > .k8s-logo-container:hover .k8s-logo {
+    animation:spin 3s linear infinite;
+  }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+}

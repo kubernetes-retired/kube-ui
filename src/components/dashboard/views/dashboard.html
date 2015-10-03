@@ -1,0 +1,47 @@
+<div class="k8s-dashboard">
+  <div class="page-heading">
+    <h2>Dashboard</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="stats-panel">
+        <k8s-loading promise="dashboard.podsPromise"></k8s-loading>
+        <div class="count" ng-bind="dashboard.pods.length">22</div>
+        <div class="count-label">Pods</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-panel">
+        <k8s-loading promise="dashboard.nodesPromise"></k8s-loading>
+        <div class="count">{{ dashboard.nodes.length }}</div>
+        <div class="count-label">Nodes</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-panel">
+        <k8s-loading promise="dashboard.replicationControllersPromise"></k8s-loading>
+        <div class="count" ng-bind="dashboard.replicationControllers.length"></div>
+        <div class="count-label">Replication Controllers</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stats-panel">
+        <k8s-loading promise="dashboard.servicesPromise"></k8s-loading>
+        <div class="count" ng-bind="dashboard.services.length"></div>
+        <div class="count-label">Services</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Nodes</h3>
+    </div>
+  </div>
+  <div class="row k8s-node-overview" ng-controller="DashboardCAdvisorController"><!-- TODO: use "controller as" syntax after refactoring -->
+    <div class="col-md-4" ng-repeat="node in nodes track by node.metadata.name">
+      <div class="k8s-bordered-box">
+        <kube-ui-dthree-minion-bar-gauge graph-data="activeNodeDataById[node.metadata.name]" graph-width="300" graph-height="300" thickness="18"></kube-ui-dthree-minion-bar-gauge>
+      </div>
+    </div>
+  </div>
+</div>

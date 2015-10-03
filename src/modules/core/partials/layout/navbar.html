@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default navbar-fixed-top k8s-navbar" ng-controller="NavbarController as navbar">
+  <div class="navbar-brand k8s-logo-container">
+    <a ui-sref="k8s.components.dashboard">
+      <img src="img/kubernetes-logo.png" alt="Kubernetes" class="k8s-logo"> Kubernetes
+    </a>
+  </div>
+  <p class="navbar-text hidden-sm hidden-xs">
+    Kube-UI v0.3.0-alpha {{ navbar.openClusterNamespaceModal }}
+  </p>
+  <ul class="nav navbar-nav pull-right">
+    <li><a href="#" ng-click="$event.preventDefault();navbar.openClusterNamespaceModal()"><i class="fa fa-cog"></i> Cluster/Namespace</a></li>
+  </ul>
+  <p class="navbar-text pull-right"><span class="label label-default"><i class="fa fa-cubes"></i> Namespace: {{ navbar.selectedNamespace.metadata.name }}</span></p>
+  <p class="navbar-text pull-left hidden-sm hidden-md hidden-lg"><span class="label label-default"><i class="fa fa-cubes"></i> Namespace: {{ navbar.selectedNamespace.metadata.name }}</span></p>
+  <p class="navbar-text pull-right hidden-xs"><span class="label label-default"><i class="fa fa-server"></i> Cluster: {{ navbar.selectedCluster.kubeApiUrl }}</span></p>
+</nav>

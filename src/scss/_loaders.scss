@@ -1,0 +1,9 @@
+/* loaders.css overwrites */
+
+.k8s-loading {
+  display: inline-block;
+}
+
+.loader-inner > div {
+  background-color: $navbar-background-color;
+}

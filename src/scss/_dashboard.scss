@@ -1,0 +1,13 @@
+.k8s-dashboard {
+	.stats-panel {
+		padding: 10px;
+		border: 1px #ccc solid;
+		background: white;
+		margin-bottom: 10px;
+
+		.count {
+			font-size: 40px;
+			line-height: 40px;
+		}
+	}
+}

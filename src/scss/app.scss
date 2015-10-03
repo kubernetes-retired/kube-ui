@@ -1,0 +1,71 @@
+/* k8s vars */
+$navbar-height: 75px;
+$navbar-background-color: #326DE6;
+$text-shadow-blue-background: 1px 1px 1px #556AA9;
+
+/* bootstrap overwrites */
+$body-bg: #EDF1F2;
+$brand-primary: #326DE6;
+$navbar-light-background-color: #fff;
+$navbar-default-link-color: lighten($navbar-background-color, 70);
+$navbar-default-link-hover-color: #fff;
+$navbar-default-brand-hover-bg: #fff;
+$navbar-default-color: #fff;
+$navbar-default-link-hover-bg: darken(#326DE6, 20);
+$navbar-default-link-active-bg: $navbar-default-link-hover-bg;
+$navbar-default-link-active-color: #fff;
+$navbar-default-border: $navbar-background-color;
+$navbar-default-bg: $navbar-background-color;
+
+$border-radius-large: 0;
+
+/* font-awesome overwrites */
+$fa-font-path: "../bower_components/font-awesome/fonts";
+
+
+@import "./../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "./../bower_components/font-awesome/scss/font-awesome";
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.modal-header {
+  background-color: $navbar-background-color;
+  color: #fff;
+  text-shadow: $text-shadow-blue-background;
+}
+
+.btn.btn-primary {
+  text-shadow: $text-shadow-blue-background;
+}
+
+.k8s-main-content {
+  padding-top: $navbar-height + 18px;
+  flex-grow: 1;
+  margin-left: 250px;
+
+  .page-heading {
+    margin-bottom: 25px;
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+/* basic box styles */
+.k8s-bordered-box {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px #D6D6D6 solid;
+  margin-bottom: 10px;
+}
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
+

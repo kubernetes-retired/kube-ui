@@ -1,3 +1,14 @@
+# Web UI
+node_modules/
+npm-debug.log
+dist/
+src/css/
+src/bower_components/
+.tmp/
+
+# binaries
+kube-ui
+
 # OSX leaves these everywhere on SMB shares
 ._*
 
@@ -8,12 +19,6 @@
 .classpath
 .project
 .settings/**
-
-# This is where the result of the go build goes
-/output/**
-/output
-/_output/**
-/_output
 
 # Emacs save files
 *~
@@ -27,12 +32,6 @@
 Session.vim
 .netrwhist
 
-# Go test binaries
-*.test
-/hack/.test-cmd-auth
-
-# JUnit test output from ginkgo e2e tests
-/junit*.xml
 
 # Mercurial files
 **/.hg
@@ -40,6 +39,7 @@ Session.vim
 
 # Vagrant
 .vagrant
+<<<<<<< HEAD
 network_closure.sh
 
 # Compiled binaries in third_party
@@ -74,4 +74,3 @@ master/npm-11278-00d1fb62/
 master/phantomjs/
 master/npm-5364-70388efc/
 .idea
-/app/

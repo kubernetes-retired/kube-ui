@@ -31,8 +31,8 @@ if ! which go-bindata > /dev/null 2>&1 ; then
 fi
 
 readonly TMP_DATAFILE="/tmp/datafile.go"
-readonly DASHBOARD_SRC="app/..."
-readonly DASHBOARD_PKG="data"
+readonly DASHBOARD_SRC="src/..."
+readonly DASHBOARD_PKG="server/data"
 
 function kube::hack::build_ui() {
   local pkg="$1"
