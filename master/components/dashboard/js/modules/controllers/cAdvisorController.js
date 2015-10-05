@@ -35,7 +35,7 @@ app.controller('cAdvisorController', [
                   hostname = m.status.addresses[0].address;
 
                 $scope.activeMinionDataById[m.metadata.name] =
-                    transformMemCpuInfo(data.memoryData, data.cpuData, data.filesystemData, maxData, hostname);
+                    transformMemCpuInfo(data.memoryData, data.cpuData, data.filesystemData, maxData, hostname, m.status.capacity.cpu);
               });
 
             },
@@ -119,7 +119,7 @@ app.controller('cAdvisorController', [
       return items;
     }
 
-    function transformMemCpuInfo(mem, cpu, fsDataArray, maxData, hostName) {
+    function transformMemCpuInfo(mem, cpu, fsDataArray, maxData, hostName, numCpus) {
       var currentMem = mem.current;
       var currentCpu = cpu;
 
@@ -127,7 +127,7 @@ app.controller('cAdvisorController', [
 
       items.push({
         label: 'CPU',
-        stats: currentCpu.cpuPercentUsage + '%',
+        stats: currentCpu.cpuPercentUsage + '% / ' + numCpus + ' CPU',
         value: currentCpu.cpuPercentUsage,
         classNames: getColorForIndex(0, currentCpu.cpuPercentUsage),
         maxData: maxData[0],
