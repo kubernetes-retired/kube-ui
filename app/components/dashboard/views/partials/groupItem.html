@@ -18,9 +18,9 @@
               <!-- title -->
               <div ng-switch on='item.metadata.labels["type"]'>
                 <div class="group-name">
-                  <a ng-switch-when='pod' ng-href="#/dashboard/pods/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
-                  <a ng-switch-when='service' ng-href="#/dashboard/services/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
-                  <a ng-switch-when='replicationController' ng-href="#/dashboard/replicationcontrollers/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
+                  <a ng-switch-when='pod' ng-href="#/dashboard/pods/{{ item.metadata.namespace }}/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
+                  <a ng-switch-when='service' ng-href="#/dashboard/services/{{ item.metadata.namespace }}/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
+                  <a ng-switch-when='replicationController' ng-href="#/dashboard/replicationcontrollers/{{ item.metadata.namespace }}/{{ item.metadata.name }}">{{ item.metadata.name }}</a>
                   <div ng-switch-default>{{item.metadata.name}}</div>
                 </div>
               </div>
