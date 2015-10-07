@@ -37,6 +37,7 @@ import (
 // cli flags
 var (
 	insecurePort        = flag.Int("insecure-port", 8080, "The port on which to serve unsecured, unauthenticated access. Default 8080. It is assumed that firewall rules are set up such that this port is not reachable from outside of the network and that port 443 on the server's public address is proxied to this port.")
+	port                = flag.Int("port", 0, "DEPRECATED. The port on which to serve unsecured, unauthenticated access. Default 8080. It is assumed that firewall rules are set up such that this port is not reachable from outside of the network and that port 443 on the server's public address is proxied to this port.")
 	insecureBindAddress = flag.String("insecure-bind-address", "0.0.0.0", "The IP address on which to serve the --insecure-port (set to 0.0.0.0 for all interfaces). Defaults to localhost.")
 
 	datastoreType = flag.String("datastore", "boltdb", "The datastore type (currently only boltdb available) to store kube-ui related data")
@@ -68,6 +69,11 @@ func main() {
 	if *boltDBFile == "" && *datastoreType == "boltdb" {
 		log.Println("--boltdb-file flag is required!")
 		os.Exit(2)
+	}
+
+	if *port > 0 {
+		log.Println("WARNING: port is deprecated! Please use --insecure-port.")
+		*insecurePort = *port
 	}
 
 	store := boltdb.NewBoltDBDataStore(*boltDBFile)
