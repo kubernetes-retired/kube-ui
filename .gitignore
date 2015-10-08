@@ -9,6 +9,7 @@ src/bower_components/
 
 # binaries
 kube-ui
+server/server
 
 # OSX leaves these everywhere on SMB shares
 ._*
@@ -40,7 +41,6 @@ Session.vim
 
 # Vagrant
 .vagrant
-<<<<<<< HEAD
 network_closure.sh
 
 # Compiled binaries in third_party
@@ -75,3 +75,4 @@ master/npm-11278-00d1fb62/
 master/phantomjs/
 master/npm-5364-70388efc/
 .idea
+network_closure.sh
