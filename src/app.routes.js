@@ -9,7 +9,7 @@ angular.module('k8s.app')
       resolve: {
         /* @ngInject */
         k8sClusterNamespace: function(k8sClusterNamespaceInfo) {
-          return k8sClusterNamespaceInfo.selectDefault();
+          return k8sClusterNamespaceInfo._selectDefault();
         }
       },
       /* @ngInject */

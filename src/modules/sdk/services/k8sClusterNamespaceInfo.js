@@ -1,4 +1,4 @@
-angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($q, kubeuiApiClusters, k8sApiNamespaces, $state) {
+angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($q, kubeuiApiClusters, k8sApiNamespaces, $state, $rootScope) {
 
   var selectedCluster = null;
   var selectedNamespace = null;
@@ -19,6 +19,8 @@ angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($
           reload: true,
           location: 'replace'
         });
+
+        $rootScope.$emit('k8sClusterNamespaceChangeSuccess', selectedCluster, selectedNamespace);
     })
     });
   };
@@ -31,7 +33,11 @@ angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($
     return selectedNamespace;
   };
 
-  this.selectDefault = function selectDefault() {
+  /**
+   * @private
+   * @return {$q.Promise} A promise that gets resolved when the cluster and namespace are selected successfuly.
+   */
+  this._selectDefault = function selectDefault() {
     selectedCluster = null;
     selectedNamespace = null;
     return kubeuiApiClusters.getList().then(function(availableClusters) {
