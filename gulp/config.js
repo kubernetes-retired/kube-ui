@@ -4,7 +4,7 @@ exports.PATH = {
     src: 'src/',
     tmp: '.tmp/',
     dist: 'dist/',
-		srcFiles: ['src/**/*.js', '!src/bower_components/**/*'],
+		srcFiles: ['src/**/*.js'],
     moduleSrcFiles: ['src/**/*.module.js'],
 		unitTestFiles: ['test/unit/**/*.js'],
 		e2eTestFiles: ['test/e2e/**/.spec.js'],

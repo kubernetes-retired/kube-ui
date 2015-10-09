@@ -2,7 +2,7 @@ angular.module('k8s.core.services')
   /**
    * todo: maybe move this to k8s.sdk module? (maybe its useful for other component developers to open the modal)
    */
-  .service('k8sClusterNamespaceModal', function($modal, $q) {
+  .service('k8sClusterNamespaceModal', function($uibModal, $q) {
     /**
      * @param {boolean=} closable Is the user allowed to close the modal window?
      */
@@ -20,6 +20,6 @@ angular.module('k8s.core.services')
         modalConfig.keyboard = false;
         modalConfig.resolve.isClosable = $q.resolve(false);
       }
-      return $modal.open(modalConfig);
+      return $uibModal.open(modalConfig);
     };
   });
