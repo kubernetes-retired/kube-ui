@@ -1,0 +1,54 @@
+.k8s-event-bar-button {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  height: 30px;
+  height: 40px;
+  padding: 10px;
+  width: 250px;
+  background: #fff;
+  border: 1px #C1C1C1 solid;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px #999;
+  user-select: none;
+  z-index: 900;
+}
+
+.k8s-event-bar-container {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  top: 105px;
+  width: 250px;
+  background: #fff;
+  border: 1px #C1C1C1 solid;
+  z-index: 899;
+  box-shadow: 1px 1px 3px #999;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.k8s-event-entry {
+  margin-bottom: 10px;
+
+  &.ng-enter {
+    -webkit-animation: fadeInDown 1s;
+    animation: fadeInDown 1s;
+  }
+
+  .k8s-event-entry-body {
+    background: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .k8s-event-entry-footer {
+    text-align: right;
+    color: #999;
+    font-size: 11px;
+
+    .component {
+      font-weight: bold;
+    }
+  }
+}

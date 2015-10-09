@@ -3,12 +3,14 @@
   var vendorModules = [
     'ui.router',
     'ui.bootstrap',
-    'restangular'
+    'restangular',
+    'ngAnimate'
   ];
 
   var subModules = [
     'k8s.sdk.services',
     'k8s.sdk.directives',
+    'k8s.sdk.filters',
     'k8s.sdk.k8sapi'
   ];
 
