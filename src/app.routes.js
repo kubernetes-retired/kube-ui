@@ -40,14 +40,28 @@ angular.module('k8s.app')
       }
     });
 
+    // base route for all components
     $stateProvider.state('k8s.components', {
       abstract: true,
       url: '/components',
       template: '<div class="row"><div class="col-md-12" ui-view></div></div>'
-    })
+    });
   })
   .run(function($rootScope, $state, k8sClusterNamespaceInfo) {
-    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
-      console.error('$stateChangeError', event, toState, toParams, fromState, fromParams);
+    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+      // we prevent the $UrlRouter from reverting the URL to the previous valid location (in case of a URL navigation).
+      event.preventDefault();
+      console.error('$stateChangeError', event, toState, toParams, fromState, fromParams, error);
+      $state.go('error', {
+        uiRouterDetails: JSON.stringify({
+          toState: toState,
+          toParams: toParams,
+          fromState: fromState,
+          fromParams: fromParams,
+          error: error
+        })
+      }, {
+        location: false
+      })
     });
   });

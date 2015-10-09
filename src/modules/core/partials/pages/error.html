@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12" style="background: #fff; padding-top: 10px; padding-bottom: 10px; text-align:center">
+      <img src="img/kubernetes-logo.svg" alt="Kubernetes logo" width="60"><h2>Kubernetes</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-danger"><i class="fa fa-exclamation-circle"></i> Oops, an error occured!</h1>
+      <p>
+        We couldn't load the requested page. See the error details below.<br />
+        If you think it's a Kube-UI bug, <a href="https://github.com/kubernetes/kube-ui/issues/new">please file an issue</a>. Thank you!
+      </p>
+      <div class="alert alert-danger">
+        <h3>Error object</h3>
+        <p>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="(key, value) in ctrl.$stateParams.uiRouterDetails.error">
+                <td ng-bind="key"></td>
+                <td ng-bind="value | json"></td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+        <hr>
+        <h3>State details:</h3>
+        <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="(key, value) in ctrl.$stateParams.uiRouterDetails" ng-if="key !== 'error'">
+                <td ng-bind="key"></td>
+                <td ng-if="!ctrl.isObject(value)"></td>
+                <td ng-if="ctrl.isObject(value)">
+                  <table class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="(innerKey, innerValue) in value" ng-if="key !== 'error'">
+                        <td ng-bind="innerKey"></td>
+                        <td ng-bind="innerValue | json"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
