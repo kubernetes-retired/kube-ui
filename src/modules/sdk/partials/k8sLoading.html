@@ -1,7 +1,17 @@
-<div class="k8s-loading loader-inner line-scale-pulse-out" ng-show="ctrl.showLoading">
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
+<div>
+  <div class="k8s-loading loader-inner line-scale-pulse-out" ng-show="ctrl.showLoading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div ng-show="ctrl.showErrorMessage && ctrl.hideErrorMessage !== 'true'">
+    <div class="alert alert-danger">
+      {{ ctrl.errorMessage || 'Request failed' }}
+      <p>
+        You think it's a Kube-UI bug?<br />
+        <a href="https://github.com/kubernetes/kube-ui/issues/new">Please an issue here.</a> Thank you!
+    </div>
+  </div>
 </div>
