@@ -12,7 +12,8 @@
     "loaders.css": "0.1.1",
     "font-awesome": "~4.4.0",
     "d3": "~3.5.6",
-    "animate.css": "~3.4.0"
+    "animate.css": "~3.4.0",
+    "angular-scroll-glue": "~2.0.6"
   },
   "devDependencies": {
     "angular-mocks": "1.4.0",

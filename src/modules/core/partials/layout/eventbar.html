@@ -1,5 +1,5 @@
 <div ng-controller="K8sEventBarController as ctrl">
-  <div class="k8s-event-bar-container animated" ng-class="{slideInUp: ctrl.showBar, slideOutDown: !ctrl.showBar}">
+  <div class="k8s-event-bar-container animated" scroll-glue ng-class="{slideInUp: ctrl.showBar, slideOutDown: !ctrl.showBar}">
    <k8s-loading promise="ctrl.eventsPromise" size="small" hide-error-message="true"></k8s-loading>
     <div class="k8s-event-entry" ng-repeat="event in ctrl.events | orderBy:'lastTimestamp' track by event.metadata.uid">
       <div class="k8s-event-entry-body">
