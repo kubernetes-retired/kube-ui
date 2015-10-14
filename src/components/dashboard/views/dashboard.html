@@ -4,31 +4,60 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <div class="stats-panel">
-        <k8s-loading promise="dashboard.podsPromise"></k8s-loading>
-        <div class="count" ng-bind="dashboard.pods.length">22</div>
-        <div class="count-label">Pods</div>
+      <div class="stats-panel k8s-bordered-box">
+        <div class="k8s-bordered-box-body">
+          <div class="icon">
+            <i class="fa fa-cube fa-3x fa-fw"></i>
+
+          </div>
+          <div class="content">
+            <k8s-loading ng-if="!dashboard.pods"></k8s-loading>
+            <div class="count" ng-bind="dashboard.pods.length">22</div>
+            <div class="count-label">Pods</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="stats-panel">
-        <k8s-loading promise="dashboard.nodesPromise"></k8s-loading>
-        <div class="count">{{ dashboard.nodes.length }}</div>
-        <div class="count-label">Nodes</div>
+      <div class="stats-panel k8s-bordered-box">
+        <div class="k8s-bordered-box-body">
+          <div class="icon">
+            <i class="fa fa-server fa-3x fa-fw"></i>
+          </div>
+          <div class="content">
+            <k8s-loading ng-if="!dashboard.nodes"></k8s-loading>
+            <div class="count">{{ dashboard.nodes.length }}</div>
+            <div class="count-label">Nodes</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="stats-panel">
-        <k8s-loading promise="dashboard.replicationControllersPromise"></k8s-loading>
-        <div class="count" ng-bind="dashboard.replicationControllers.length"></div>
-        <div class="count-label">Replication Controllers</div>
+      <div class="stats-panel k8s-bordered-box">
+        <div class="k8s-bordered-box-body">
+          <div class="icon">
+            <i class="fa fa-cubes fa-3x fa-fw"></i>
+          </div>
+          <div class="content">
+            <k8s-loading ng-if="!dashboard.replicationControllers"></k8s-loading>
+            <div class="count" ng-bind="dashboard.replicationControllers.length"></div>
+            <div class="count-label">Replication Controllers</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="stats-panel">
-        <k8s-loading promise="dashboard.servicesPromise"></k8s-loading>
-        <div class="count" ng-bind="dashboard.services.length"></div>
-        <div class="count-label">Services</div>
+      <div class="stats-panel k8s-bordered-box">
+        <div class="k8s-bordered-box-body">
+          <div class="icon">
+            <i class="fa fa-angle-double-right fa-3x fa-fw"></i>
+          </div>
+          <div class="content">
+            <k8s-loading ng-if="!dashboard.services"></k8s-loading>
+            <div class="count" ng-bind="dashboard.services.length"></div>
+            <div class="count-label">Services</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

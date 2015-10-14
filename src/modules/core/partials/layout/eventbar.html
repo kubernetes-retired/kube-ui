@@ -1,13 +1,15 @@
 <div ng-controller="K8sEventBarController as ctrl">
-  <div class="k8s-event-bar-container animated" scroll-glue ng-class="{slideInUp: ctrl.showBar, slideOutDown: !ctrl.showBar}">
+  <div class="k8s-event-bar-container animated" scroll-glue ng-show="ctrl.showBar" ng-class="{slideInUp: ctrl.showBar, slideOutDown: !ctrl.showBar}">
    <k8s-loading promise="ctrl.eventsPromise" size="small" hide-error-message="true"></k8s-loading>
-    <div class="k8s-event-entry" ng-repeat="event in ctrl.events | orderBy:'lastTimestamp' track by event.metadata.uid">
+    <div class="k8s-event-entry" ng-repeat="event in ctrl.events | orderBy:'lastTimestamp' | limitTo:100 track by event.metadata.uid">
       <div class="k8s-event-entry-body">
-        {{ ::event.message }}
+        <p>Involved:<br />{{ ::event.involvedObject.kind }} {{ ::event.involvedObject.name }}</p>
+        <p>Message:<br />{{ ::event.message }}</p>
+        
       </div>
       <div class="k8s-event-entry-footer">
-        by <span class="component">{{ ::event.source.component }}</span> ({{ ::event.source.host }})<br />
-        <span tooltip-placement="left" uib-tooltip="{{ event.lastTimestamp | date:'mediumDate' }} {{ event.lastTimestamp | date:'mediumTime' }}">{{ event.lastTimestamp | k8sTimeSince }}
+        by <span class="component">{{ ::event.source.component }}</span> <span ng-if="::event.source.host">({{ ::event.source.host }})</span><br />
+        <span tooltip-placement="left" uib-tooltip="{{ event.lastTimestamp | date:'mediumDate' }} {{ event.lastTimestamp | date:'mediumTime' }}">{{ ::(event.lastTimestamp | k8sTimeSince) }}
       </div>
     </div>
   </div>

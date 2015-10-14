@@ -4,7 +4,7 @@ $navbar-background-color: #326DE6;
 $text-shadow-blue-background: 1px 1px 1px #556AA9;
 
 /* bootstrap overwrites */
-$body-bg: #EDF1F2;
+$body-bg: #EDF0F0;
 $brand-primary: #326DE6;
 $navbar-light-background-color: #fff;
 $navbar-default-link-color: lighten($navbar-background-color, 70);
@@ -41,15 +41,18 @@ body {
 }
 
 .k8s-main-content {
-  padding-top: $navbar-height + 18px;
+  padding-top: $navbar-height + 20px;
   flex-grow: 1;
   margin-left: 250px;
   padding-bottom: 30px;
 
   .page-heading {
     margin-bottom: 25px;
+    @include clearfix;
 
-    h1, h2, h3 {
+    h1, h2, h3, .page-title {
+      display: inline-block;
+      float: left;
       margin-top: 0;
     }
   }
@@ -58,9 +61,25 @@ body {
 /* basic box styles */
 .k8s-bordered-box {
   background: #fff;
-  border-radius: 4px;
-  border: 1px #D6D6D6 solid;
+  box-shadow: 0 0 5px #CACDD8;
   margin-bottom: 10px;
+  border-radius: 2px;
+  border: 1px #CCD0DC solid;
+  
+  .k8s-bordered-box-header {
+    background: $brand-primary;
+    color: #fff;
+    text-shadow: $text-shadow-blue-background;
+    padding: 10px;
+  }
+
+  .k8s-bordered-box-body {
+    padding: 10px;
+  }
+  .k8s-bordered-box-title {
+    margin: 0;
+    font-size: 16px;
+  }
 }
 
 /**

@@ -1,13 +1,30 @@
-.k8s-dashboard {
-	.stats-panel {
-		padding: 10px;
-		border: 1px #ccc solid;
-		background: white;
-		margin-bottom: 10px;
+.k8s-dashboard .stats-panel {
+	.k8s-bordered-box-body {
+		padding: 0;
+		@include clearfix;
+	}
 
-		.count {
-			font-size: 40px;
-			line-height: 40px;
-		}
+	.icon {
+		float: left;
+		background: #09C1D1;
+		color: #fff;
+		padding: 20px 10px;
+		margin-right: 15px;
+		border: 2px #fff solid;
+	}
+
+	.content {
+		padding-top: 10px;
+		padding-right: 5px;
+		text-overflow: ellipsis;
+	}
+
+	.count {
+		font-size: 40px;
+		line-height: 40px;
+	}
+
+	.count-label {
+		white-space: nowrap;
 	}
 }
