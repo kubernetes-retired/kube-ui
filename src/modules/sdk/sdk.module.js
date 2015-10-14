@@ -3,8 +3,11 @@
   var vendorModules = [
     'ui.router',
     'ui.bootstrap',
+    'ui.ace',
     'restangular',
-    'ngAnimate'
+    'ngAnimate',
+    'luegg.directives',
+    'smart-table'
   ];
 
   var subModules = [
