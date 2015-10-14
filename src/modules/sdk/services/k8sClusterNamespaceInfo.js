@@ -8,10 +8,11 @@ angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($
       selectedCluster = cluster;
       return k8sApiNamespaces(clusterUid).one(namespaceName).get().then(function(namespace) {
         selectedNamespace = namespace;
-      }).then(function() {
+
         if (!changeState) {
           return;
         }
+
         $state.go($state.current.name, {
           clusterUid: selectedCluster.uid,
           namespaceName: selectedNamespace.metadata.name
@@ -21,7 +22,8 @@ angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($
         });
 
         $rootScope.$emit('k8sClusterNamespaceChangeSuccess', selectedCluster, selectedNamespace);
-    })
+        return true;
+      });
     });
   };
 
