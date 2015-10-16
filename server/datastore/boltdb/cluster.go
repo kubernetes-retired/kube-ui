@@ -2,7 +2,7 @@ package boltdb
 
 import (
 	"github.com/boltdb/bolt"
-	"github.com/kubernetes/kube-ui/server/types"
+	"k8s.io/kube-ui/server/types"
 	"labix.org/v2/mgo/bson"
 )
 

@@ -2,7 +2,6 @@ package proxypool
 
 import (
 	"errors"
-	"labix.org/v2/mgo/bson"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -10,7 +9,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/kubernetes/kube-ui/server/types"
+	"k8s.io/kube-ui/server/types"
+	"labix.org/v2/mgo/bson"
 )
 
 type ProxyPool struct {

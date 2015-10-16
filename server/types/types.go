@@ -1,8 +1,9 @@
 package types
 
 import (
-	"labix.org/v2/mgo/bson"
 	"net/url"
+
+	"labix.org/v2/mgo/bson"
 )
 
 // Cluster represents a Kubernetes cluster.

@@ -2,10 +2,11 @@ package api
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/kubernetes/kube-ui/server/datastore"
-	"github.com/kubernetes/kube-ui/server/proxypool"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"k8s.io/kube-ui/server/datastore"
+	"k8s.io/kube-ui/server/proxypool"
 )
 
 type BaseContext struct {

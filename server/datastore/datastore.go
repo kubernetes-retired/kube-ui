@@ -1,11 +1,12 @@
 package datastore
 
 import (
-	"github.com/kubernetes/kube-ui/server/types"
-	"labix.org/v2/mgo/bson"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"k8s.io/kube-ui/server/types"
+	"labix.org/v2/mgo/bson"
 )
 
 var usedDatastore Datastore

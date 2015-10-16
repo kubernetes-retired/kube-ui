@@ -27,11 +27,11 @@ import (
 
 	"github.com/codegangsta/negroni"
 	"github.com/elazarl/go-bindata-assetfs"
-	"github.com/kubernetes/kube-ui/server/api"
-	"github.com/kubernetes/kube-ui/server/data"
-	"github.com/kubernetes/kube-ui/server/datastore"
-	"github.com/kubernetes/kube-ui/server/datastore/boltdb"
-	"github.com/kubernetes/kube-ui/server/proxypool"
+	"k8s.io/kube-ui/server/api"
+	"k8s.io/kube-ui/server/data"
+	"k8s.io/kube-ui/server/datastore"
+	"k8s.io/kube-ui/server/datastore/boltdb"
+	"k8s.io/kube-ui/server/proxypool"
 )
 
 // cli flags

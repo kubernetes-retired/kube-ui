@@ -1,12 +1,13 @@
 package api
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/kubernetes/kube-ui/server/types"
-	"labix.org/v2/mgo/bson"
 	"log"
 	"net/http"
 	"net/url"
+
+	"github.com/gorilla/mux"
+	"k8s.io/kube-ui/server/types"
+	"labix.org/v2/mgo/bson"
 )
 
 func kubernetesProxyHandler(c *Context) {
