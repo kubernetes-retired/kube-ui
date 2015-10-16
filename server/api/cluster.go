@@ -64,6 +64,8 @@ func createClusterHandler(c *Context) {
 
 	if err := c.Datastore.CreateCluster(&newCluster); err != nil {
 		log.Println("Error creating new cluster:", err)
+		c.w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	go func(context *Context, cluster *types.Cluster) {
 		if err := context.ProxyPool.AddCluster(cluster); err != nil {
