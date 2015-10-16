@@ -1,0 +1,2 @@
+# igonore vendor files in Github language stats
+Godeps/_workspace/* linguist-vendored
