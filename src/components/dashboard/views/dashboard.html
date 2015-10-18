@@ -67,9 +67,11 @@
     </div>
   </div>
   <div class="row k8s-node-overview" ng-controller="DashboardCAdvisorController"><!-- TODO: use "controller as" syntax after refactoring -->
-    <div class="col-md-4" ng-repeat="node in nodes track by node.metadata.name">
+    <div class="col-md-12">
       <div class="k8s-bordered-box">
-        <kube-ui-dthree-minion-bar-gauge graph-data="activeNodeDataById[node.metadata.name]" graph-width="300" graph-height="300" thickness="18"></kube-ui-dthree-minion-bar-gauge>
+        <div class="k8s-borderd-box-body">
+          <kube-ui-dthree-minion-bar-gauge graph-data="activeNodeDataById[node.metadata.name]" graph-width="300" graph-height="300" thickness="18" ng-repeat="node in nodes track by node.metadata.name"></kube-ui-dthree-minion-bar-gauge>
+        </div>
       </div>
     </div>
   </div>

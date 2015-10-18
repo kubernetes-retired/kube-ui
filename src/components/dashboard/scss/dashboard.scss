@@ -8,6 +8,11 @@
   opacity: 0.2;
 }
 
+kube-ui-dthree-minion-bar-gauge {
+  width: 300px;
+  display: inline-block;
+}
+
 
 $colorsList: #2962FF,
   #AA00FF,
@@ -133,21 +138,18 @@ $i: 0;
   background-color: lighten(#512DA8, 35%);
   border-color: lighten(#512DA8, 35%);
   fill: lighten(#512DA8, 35%);
-  // stroke: lighten(#512DA8, 35%);
 }
 
 .color-max-2 {
   background-color: lighten(#9C27B0, 35%);
   border-color: lighten(#9C27B0, 35%);
   fill: lighten(#9C27B0, 35%);
-  // stroke: lighten(#9C27B0, 35%);
 }
 
 .color-max-3 {
   background-color: lighten(#00BCD4, 35%);
   border-color: lighten(#00BCD4, 35%);
   fill: lighten(#00BCD4, 35%);
-  // stroke: lighten(#00BCD4, 35%);
 }
 
 .color-max-warning {
@@ -172,13 +174,7 @@ $i: 0;
   .bg-circle {
     background: #EFEFEF;
     fill: #ECECEC;
-    stroke: #CCCCCC;
-    stroke-width: 1px;
-  }
-  path {
-    // stroke: #FFFFFF;
-    // stroke-width: 1px;
-    // opacity:0.8;
+    stroke-width: 0;
   }
   text {
     font-size:12px;
@@ -190,8 +186,6 @@ $i: 0;
   }
 
   .legend_group rect {
-    // stroke: #cccccc;
-    // stroke-width: 1px;
     opacity:0.8;
   }
 }
