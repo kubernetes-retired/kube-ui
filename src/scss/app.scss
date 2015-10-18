@@ -40,11 +40,19 @@ body {
   text-shadow: $text-shadow-blue-background;
 }
 
+.k8s-sidebar-transition {
+  transition: 0.15s;
+}
+
 .k8s-main-content {
   padding-top: $navbar-height + 20px;
   flex-grow: 1;
   margin-left: 250px;
   padding-bottom: 30px;
+
+  &.sidebar-collapsed {
+    margin-left: 0;
+  }
 
   .page-heading {
     margin-bottom: 25px;
@@ -81,6 +89,8 @@ body {
     font-size: 16px;
   }
 }
+
+
 
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject

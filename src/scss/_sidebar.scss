@@ -9,6 +9,17 @@
   margin-top: $navbar-height;
   padding: 0.9375rem;
   flex-direction: column;
+  overflow: scroll;
+
+  .k8s-sidebar-content {
+    width: 250px;
+  }
+
+  &.collapsed {
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   section {
     margin-bottom: 10px;

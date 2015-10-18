@@ -1,5 +1,5 @@
 
-angular.module('k8s.core.controllers').controller('NavbarController', function($rootScope, k8sClusterNamespaceModal, k8sClusterNamespaceInfo) {
+angular.module('k8s.core.controllers').controller('NavbarController', function($rootScope, k8sClusterNamespaceModal, k8sClusterNamespaceInfo, k8sSidebar) {
 	this.openClusterNamespaceModal = function openClusterNamespaceModal() {
     k8sClusterNamespaceModal.open(true);
   };
@@ -10,6 +10,14 @@ angular.module('k8s.core.controllers').controller('NavbarController', function($
   }.bind(this);
 
   setState();
+
+  this.isSidebarCollapsed = function isSidebarCollapsed() {
+    return k8sSidebar.isCollapsed();
+  };
+
+  this.toggleSidebar = function toggleSidebar() {
+    return k8sSidebar.toggle();
+  }
 
   $rootScope.$on('k8sClusterNamespaceChangeSuccess', setState);
 });

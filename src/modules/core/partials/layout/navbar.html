@@ -1,8 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top k8s-navbar" ng-controller="NavbarController as navbar">
-  <div class="navbar-brand k8s-logo-container">
+  <div class="navbar-brand k8s-logo-container k8s-sidebar-transition" ng-class="{'sidebar-collapsed': navbar.isSidebarCollapsed()}">
     <a ui-sref="k8s.components.dashboard">
-      <img src="img/kubernetes-logo.png" alt="Kubernetes" class="k8s-logo"> Kubernetes
+      <img src="img/kubernetes-logo.png" alt="Kubernetes" class="k8s-logo"> <span class="k8s-logo-text">Kubernetes</span>
     </a>
+    <button type="button" class="navbar-toggle collapsed" ng-click="navbar.toggleSidebar()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
   </div>
   
   <ul class="nav navbar-nav pull-right">
