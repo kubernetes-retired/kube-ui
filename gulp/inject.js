@@ -18,9 +18,8 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     path.join(config.PATH.src, '/modules/**/*.js'),
     path.join(config.PATH.src, '/components/**/*.module.js'),
     path.join(config.PATH.src, '/components/**/*.js'),
-    path.join('!' + config.PATH.src, '/shared/**/*.js'), // todo: remove line
-    path.join('!' + config.PATH.src, '/**/**/*.spec.js'),
-    path.join('!' + config.PATH.src, '/**/**/*.mock.js'),
+    path.join('!' + config.PATH.src, '/**/*.spec.js'),
+    path.join('!' + config.PATH.src, '/**/*.mock.js'),
   ])
 
   var injectOptions = {

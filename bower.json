@@ -2,25 +2,25 @@
   "name": "kube-ui",
   "dependencies": {
     "angular": "1.4.7",
-    "angular-animate": "~1.4.7",
+    "angular-animate": "1.4.7",
     "jquery": "2.1.4",
     "restangular": "1.5.1",
     "angular-ui-router": "0.2.15",
     "bootstrap-sass-official": "3.3.4",
-    "angular-bootstrap": "~0.14.0",
+    "angular-bootstrap": "0.14.0",
     "moment": "2.10.3",
     "loaders.css": "0.1.1",
-    "font-awesome": "~4.4.0",
-    "d3": "~3.5.6",
-    "animate.css": "~3.4.0",
-    "js-yaml": "~3.4.3",
+    "font-awesome": "4.4.0",
+    "d3": "3.5.6",
+    "animate.css": "3.4.0",
+    "js-yaml": "3.4.3",
     "angular-ui-ace": "bower",
-    "angular-scroll-glue": "~2.0.6",
-    "angular-smart-table": "~2.1.4"
+    "angular-scroll-glue": "2.0.6",
+    "angular-smart-table": "2.1.4",
+    "lodash": "3.10.1"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.0",
-    "lodash": "~3.10.1"
+    "angular-mocks": "1.4.7"
   },
   "resolutions": {
     "jquery": "2.1.4",

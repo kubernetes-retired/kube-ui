@@ -4,9 +4,10 @@ exports.PATH = {
     src: 'src/',
     tmp: '.tmp/',
     dist: 'dist/',
+    unit: 'test/unit/',
 		srcFiles: ['src/**/*.js'],
+    unitTestFiles: 'test/unit/*.spec.js',
     moduleSrcFiles: ['src/**/*.module.js'],
-		unitTestFiles: ['test/unit/**/*.js'],
 		e2eTestFiles: ['test/e2e/**/.spec.js'],
     scssFiles: ['src/scss/**.scss', 'src/components/**/scss/*.scss'],
 };

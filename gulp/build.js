@@ -92,4 +92,4 @@ gulp.task('clean', function (done) {
   plugins.del([path.join(config.PATH.dist, '/'), path.join(config.PATH.tmp, '/')], done);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['clean', 'html', 'fonts', 'other']);
