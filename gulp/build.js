@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var config = require('./config');
+var runSequence = require('run-sequence').use(gulp);
 
 var plugins = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -92,4 +93,6 @@ gulp.task('clean', function (done) {
   plugins.del([path.join(config.PATH.dist, '/'), path.join(config.PATH.tmp, '/')], done);
 });
 
-gulp.task('build', ['clean', 'html', 'fonts', 'other']);
+gulp.task('build', function() {
+  runSequence('clean', ['html', 'fonts', 'other']);
+});
