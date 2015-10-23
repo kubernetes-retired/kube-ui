@@ -1,0 +1,29 @@
+k8s-label-view {
+  display: inline;
+
+  .k8s-label {
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 12px;
+
+    .key {
+      display: inline-block;
+      background: $brand-primary;
+      color: #fff;
+      padding: 3px 5px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      text-shadow: 1px 1px 1px #3E4EA2;
+    }
+
+    .value {
+      display: inline-block;
+      background: #09C1D2;
+      color: #fff;
+      padding: 3px 5px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      text-shadow: 1px 1px 1px #4D9BA2;
+    }
+  }
+}
