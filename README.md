@@ -1,7 +1,11 @@
+# Kube-UI [![Build Status](https://travis-ci.org/SebastianM/kube-ui.svg?branch=pod-visualizer)](https://travis-ci.org/SebastianM/kube-ui) (TODO: change travis badge to kubernetes repo)
+> Join the UI discussion at: https://groups.google.com/forum/#!forum/kubernetes-sig-ui
 
-Join the UI discussion at: https://groups.google.com/forum/#!forum/kubernetes-sig-ui
+**Kube-UI** is a web-based user interface for displaying & managing the state of one or more Kubernetes clusters.
 
-# Working with the Kubernetes UI
+![Screenshot](docs/assets/kube-ui-screenshot.gif)
+
+## Working with the Kubernetes UI
 This document explains how to work with the Kubernetes UI. For information on how to access and use it, see [docs/ui.md](docs/ui.md).
 
 ## Installing dependencies
