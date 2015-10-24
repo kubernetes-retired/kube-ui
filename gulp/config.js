@@ -9,7 +9,7 @@ exports.PATH = {
     unitTestFiles: 'test/unit/*.spec.js',
     moduleSrcFiles: ['src/**/*.module.js'],
 		e2eTestFiles: ['test/e2e/**/.spec.js'],
-    scssFiles: ['src/scss/**.scss', 'src/components/**/scss/*.scss'],
+    scssFiles: ['src/scss/**.scss', 'src/components/**/scss/*.scss', 'src/modules/**/scss/*.scss'],
 };
 
 exports.packgeInfo = require('../package.json');
