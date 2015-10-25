@@ -45,7 +45,7 @@ body {
 }
 
 .k8s-main-content {
-  padding-top: $navbar-height + 20px;
+  padding-top: $navbar-height;
   flex-grow: 1;
   margin-left: 250px;
   padding-bottom: 30px;
@@ -56,6 +56,7 @@ body {
 
   .page-heading {
     margin-bottom: 25px;
+    margin-top: 25px;
     @include clearfix;
 
     h1, h2, h3, .page-title {
@@ -88,6 +89,10 @@ body {
 
   .k8s-bordered-box-body {
     padding: 10px;
+
+    > .table {
+      margin-bottom: 0;
+    }
   }
   .k8s-bordered-box-title {
     margin: 0;
@@ -95,6 +100,56 @@ body {
   }
 }
 
+.nav.nav-tabs {
+  margin-bottom: 10px;
+  border-bottom: 1px #ccc solid;
+
+  li a {
+    text-transform: uppercase;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  li.active a {
+    border: 0;
+    border-bottom: 4px #09c1d1 solid;
+  }
+}
+
+.k8s-section-navbar {
+  background: #09c1d1;
+  margin-left: -15px;
+  margin-right: -15px;
+  height: 35px;
+  margin-bottom: 10px;
+
+  .nav.nav-tabs {
+    margin: 0;
+    border-bottom: 0;
+
+    a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      color: #fff;
+    }
+
+    li.active a {
+      background: inherit;
+    }
+  }
+}
+
+/* utility styles */
+.clickable-tr {
+  &:hover {
+    background-color: darken(#f9f9f9, 10) !important;
+  }
+  
+  td,
+  th {
+    cursor: pointer;
+  }
+}
 
 
 /**
