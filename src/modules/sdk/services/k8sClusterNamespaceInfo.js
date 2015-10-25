@@ -1,10 +1,10 @@
-angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($q, kubeuiApiClusters, k8sApiNamespaces, $state, $rootScope) {
+angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($q, k8sKubeUiApiClusters, k8sApiNamespaces, $state, $rootScope) {
 
   var selectedCluster = null;
   var selectedNamespace = null;
   
   this.selectClusterNamespace = function selectClusterNamespace(clusterUid, namespaceName, changeState) {
-    return kubeuiApiClusters.one(clusterUid).get().then(function(cluster) {
+    return k8sKubeUiApiClusters.one(clusterUid).get().then(function(cluster) {
       selectedCluster = cluster;
       return k8sApiNamespaces(clusterUid).one(namespaceName).get().then(function(namespace) {
         selectedNamespace = namespace;
@@ -42,7 +42,7 @@ angular.module('k8s.sdk.services').service('k8sClusterNamespaceInfo', function($
   this._selectDefault = function selectDefault() {
     selectedCluster = null;
     selectedNamespace = null;
-    return kubeuiApiClusters.getList().then(function(availableClusters) {
+    return k8sKubeUiApiClusters.getList().then(function(availableClusters) {
       if (availableClusters.length === 0) {
         return;
       }

@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module('k8s.sdk.k8sapi')
+  angular.module('k8s.sdk.restApi')
     .provider('k8sApi',
              function() {
 

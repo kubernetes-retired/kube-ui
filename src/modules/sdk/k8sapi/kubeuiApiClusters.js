@@ -1,3 +1,3 @@
-angular.module('k8s.sdk.k8sapi').factory('kubeuiApiClusters', function(Restangular) {
+angular.module('k8s.sdk.restApi').factory('k8sKubeUiApiClusters', function(Restangular) {
   return Restangular.service('api/clusters');
 });

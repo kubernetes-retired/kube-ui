@@ -14,7 +14,7 @@
     'k8s.sdk.services',
     'k8s.sdk.directives',
     'k8s.sdk.filters',
-    'k8s.sdk.k8sapi'
+    'k8s.sdk.restApi'
   ];
 
   angular.module('k8s.sdk', vendorModules.concat(subModules));
@@ -23,7 +23,7 @@
     angular.module(moduleName, vendorModules);
   });
 
-  angular.module('k8s.sdk.k8sapi')
+  angular.module('k8s.sdk.restApi')
     .constant('k8sBaseProxyPath', '/api/clusters/:clusterId/proxy')
     .config(function(RestangularProvider) {
       RestangularProvider.addResponseInterceptor(function (data, operation, what, url, responses, deferred) {

@@ -210,7 +210,7 @@
     };
   };
 
-  /*angular.module('k8s.sdk.k8sapi')
+  /*angular.module('k8s.sdk.restApi')
       .provider("pollK8sDataService", [pollK8sDataServiceProvider])
       .config(function(pollK8sDataServiceProvider, ENV) {
         if (ENV && ENV['/']) {

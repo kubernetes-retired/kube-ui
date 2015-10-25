@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module('k8s.sdk.k8sapi')
+  angular.module('k8s.sdk.restApi')
       .service('cAdvisorService', function($http, $q, ENV, k8sApi) {
         var _baseUrl = function(minionIp) {
           var minionPort = ENV['/']['cAdvisorPort'] || "8081";
