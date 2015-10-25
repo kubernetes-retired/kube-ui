@@ -1,0 +1,7 @@
+.k8s-pagination {
+  @include clearfix;
+
+  .pagination {
+    margin: 0;
+  }
+}
