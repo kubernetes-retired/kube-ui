@@ -31,10 +31,12 @@ angular.module('k8s.app')
     $stateProvider.state('k8s', {
       url: '/cluster/{clusterUid}/ns/{namespaceName}',
       abstract: true,
+      controller: 'MainContentController',
+      controllerAs: 'main',
       templateUrl: 'modules/core/partials/layout/main.html',
       resolve: {
         /* @ngInject */
-        k8sClusterNamespace: function($stateParams, k8sClusterNamespaceInfo) {
+        k8sSelectClusterNamespaceFromURL: function($stateParams, k8sClusterNamespaceInfo) {
           return k8sClusterNamespaceInfo.selectClusterNamespace($stateParams.clusterUid, $stateParams.namespaceName);
         }
       }
@@ -48,10 +50,32 @@ angular.module('k8s.app')
     });
   })
   .run(function($rootScope, $state, k8sClusterNamespaceInfo) {
+    var loadedClusterInfo = false;
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (!loadedClusterInfo && toState.name !== 'root' && fromState.name === '') {
+        event.preventDefault();
+        k8sClusterNamespaceInfo.selectClusterNamespace(toParams.clusterUid, toParams.namespaceName, false).then(function() {
+          loadedClusterInfo = true;
+          $state.go(toState.name, toParams);
+        }, function(error) {
+          $state.go('error', {
+            uiRouterDetails: JSON.stringify({
+              toState: toState,
+              toParams: toParams,
+              fromState: fromState,
+              fromParams: fromParams,
+              error: error
+            })
+          });
+        });
+      }
+    })
+
+    // general state error handling
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
       // we prevent the $UrlRouter from reverting the URL to the previous valid location (in case of a URL navigation).
       event.preventDefault();
-      console.error('$stateChangeError', event, toState, toParams, fromState, fromParams, error);
+      console.error('$stateChangeError', error, event, toState, toParams, fromState, fromParams);
       $state.go('error', {
         uiRouterDetails: JSON.stringify({
           toState: toState,
