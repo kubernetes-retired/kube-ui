@@ -1,0 +1,48 @@
+<div class="k8s-pod-list">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-heading">
+        <h2 class="page-title"><i class="fa fa-cube fa-fw"></i> Pods</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      
+      <div class="k8s-bordered-box" st-table="displayedPods" st-safe-src="ctrl.pods">
+        <div class="k8s-bordered-box-body">
+          <div class="alert alert-info" ng-if="ctrl.pods.length < 1">
+            No Pods available.
+          </div>
+          <table class="table table-striped" ng-show="ctrl.pods.length > 0">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Pod IP</th>
+                <th>Labels</th>
+                <th>Node</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clickable-tr" ng-repeat="pod in displayedPods track by $index" ui-sref="k8s.components.clustermanagement.pods.details({podName: pod.metadata.name})">
+                <td>
+                  <a ui-sref="k8s.components.clustermanagement.pods.details({podName: pod.metadata.name})"><strong ng-bind="pod.metadata.name"></strong></a>
+                </td>
+                <td>
+                  <span class="label" ng-class="{'label-success': pod.status.phase === 'Running', 'label-danger': pod.status.phase !== 'Running'}" ng-bind="pod.status.phase"></span>
+                </td>
+                <td ng-bind="pod.status.podIP"></td>
+                <td>
+                  <k8s-label-view labels="pod.metadata.labels"></k8s-label-view>
+                </td>
+                <td ng-bind="pod.spec.nodeName"></td>
+              </tr>
+            </tbody>
+          </table>
+          <k8s-pagination></k8s-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

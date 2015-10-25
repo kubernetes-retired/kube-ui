@@ -1,0 +1,215 @@
+<div class="k8s-pod-details">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-heading">
+        <h2 class="page-title"><i class="fa fa-cube fa-fw"></i> Pod <strong>{{ ctrl.pod.metadata.name }}</strong></h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="k8s-bordered-box">
+        <div class="k8s-bordered-box-header">
+          <i class="fa fa-info fa-fw"></i> Meta Information
+        </div>
+        <div class="k8s-bordered-box-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th width="200">Name</th>
+                <td ng-bind="ctrl.pod.metadata.name"></td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td>
+                  <span class="label" ng-class="{'label-success': ctrl.pod.status.phase === 'Running', 'label-danger': ctrl.pod.status.phase !== 'Running'}" ng-bind="ctrl.pod.status.phase"></span>
+                </td>
+              </tr>
+              <tr>
+                <th>Created / Started</th>
+                <td>
+                  {{ ctrl.pod.metadata.creationTimestamp | date:'mediumDate' }} - {{ ctrl.pod.metadata.creationTimestamp | date:'mediumTime'}} / {{ ctrl.pod.status.startTime | date:'mediumDate' }} - {{ ctrl.pod.status.startTime | date:'mediumTime'}}
+                </td>
+              </tr>
+              <tr>
+                <th>Labels</th>
+                <td>
+                  <k8s-label-view labels="ctrl.pod.metadata.labels"></k8s-label-view>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="k8s-bordered-box">
+        <div class="k8s-bordered-box-header">
+          <i class="fa fa-sitemap fa-fw"></i> Networking
+        </div>
+        <div class="k8s-bordered-box-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th width="200">Host IP</th>
+                <td ng-bind="ctrl.pod.status.hostIP">
+                </td>
+              </tr>
+              <tr>
+                <th>Pod IP</th>
+                <td ng-bind="ctrl.pod.status.podIP"></td>
+              </tr>
+              <tr>
+                <th>Node</th>
+                <td>
+                  {{ ctrl.pod.spec.nodeName }}
+                </td>
+              </tr>
+              <tr>
+                <th>DNS Policy</th>
+                <td ng-bind="ctrl.pod.spec.dnsPolicy"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{ ctrl.pod.spec.containers.length || 0 }} Container<span ng-if="ctrl.pod.spec.containers.length > 1">s</span></h3>
+    </div>
+  </div>
+  <div class="row" ng-repeat="container in ctrl.pod.spec.containers | orderBy:'name'">
+    <div class="col-md-12">
+      <div class="k8s-bordered-box">
+        <div class="k8s-bordered-box-header">
+          <i class="fa fa-fw fa-arrow-right"></i> {{ container.name }} 
+        </div>
+        <div class="k8s-bordered-box-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h4><i class="fa fa-info fa-fw"></i> Status</h4>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td ng-bind="container.name"></td>
+                  </tr>
+                  <tr>
+                    <th>Image</th>
+                    <td ng-bind="container.image"></td>
+                  </tr>
+                  <tr>
+                    <th>Image Pull Policy</th>
+                    <td>
+                      {{ container.imagePullPolicy }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Status</th>
+                    <td>
+                      <div ng-if="ctrl.containerStatusesByName[container.name].state.running">
+                        <p><span class="label label-success">Running</span></p>
+                        <p>Started: {{ ctrl.containerStatusesByName[container.name].state.running.startedAt | date:'medium'}}</p>
+                      </div>
+                      <div ng-if="ctrl.containerStatusesByName[container.name].state.waiting">
+                        <p><span class="label label-warning">Waiting</span></p>
+                        <p ng-show="ctrl.containerStatusesByName[container.name].state.waiting.reason">Reason: {{ ctrl.containerStatusesByName[container.name].state.waiting.reason }}</div>
+                      </div>
+                      <div ng-if="ctrl.containerStatusesByName[container.name].state.termination">
+                        <p><span class="label label-danger">Terminated</span></p>
+                        <p ng-show="ctrl.containerStatusesByName[container.name].state.termination.reason">Reason: {{ ctrl.containerStatusesByName[container.name].state.termination.reason }}</p>
+                        <p ng-show="ctrl.containerStatusesByName[container.name].state.termination.message">Message: {{ ctrl.containerStatusesByName[container.name].state.termination.message }}</p>
+                        <p>Exit Code: {{ ctrl.containerStatusesByName[container.name].state.termination.exitCode }}</p>
+                        <p ng-show="ctrl.containerStatusesByName[container.name].state.termination.signal">Signal: {{ ctrl.containerStatusesByName[container.name].state.termination.signal }}</p>
+                        <p>Started: {{ ctrl.containerStatusesByName[container.name].state.termination.startedAt | date:'medium' }}</p>
+                        <p>Finished: {{ ctrl.containerStatusesByName[container.name].state.termination.finishedAt | date:'medium' }}</p>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Restarts</th>
+                    <td ng-bind="ctrl.containerStatusesByName[container.name].restartCount"></td>
+                  </tr>
+                  <tr>
+                    <th>Container ID</th>
+                    <td>
+                      <div ng-bind="ctrl.containerStatusesByName[container.name].containerID" style="word-wrap: break-word; max-width: 300px"></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h4><i class="fa fa-sitemap fa-fw"></i> Ports</h4>
+              <table class="table">
+                <thead>
+                  <th>Name</th>
+                  <th>Container Port</th>
+                  <th>Protocol</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="port in container.ports | orderBy: 'containerPort'">
+                    <td ng-bind="port.name || '---'"></td>
+                    <td ng-bind="port.containerPort"></td>
+                    <td ng-bind="port.protocol"></td>
+                  </tr>
+                  <tr ng-if="!container.ports.length">
+                    <td colspan="3">No ports</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h4><i class="fa fa-hdd-o fa-fw"></i> Volume Mounts</h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Mount Path</th>
+                    <th>ReadOnly</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-if="!container.volumeMounts.length">
+                    <td colspan="3">No volume mounts</td>
+                  </tr>
+                  <tr ng-repeat="v in container.volumeMounts">
+                    <td ng-bind="v.name"></td>
+                    <td ng-bind="v.mountPath"></td>
+                    <td>
+                      <i class="fa fa-check-square-o" ng-if="v.readOnly"></i>
+                      <i class="fa fa-square-o" ng-if="!v.readOnly"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h4><i class="fa fa-cog fa-fw"></i> Enviroment Variables</h4>
+              <table class="table">
+                <tbody>
+                  <tr ng-if="!container.env.length">
+                    <td>No enviroment variables</td>
+                  </tr>
+                  <tr ng-repeat="env in container.env | orderBy:'name'">
+                    <th ng-bind="env.name"></th>
+                    <td ng-if="env.value !== undefined" ng-bind="env.value"></td>
+                    <td ng-if="env.valueFrom !== undefined">
+                      Value from field reference:<br />
+                      API Version: {{ env.valueFrom.fieldRef.apiVersion }}<br />
+                      Field Path: {{ env.valueFrom.fieldRef.fieldPath }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
