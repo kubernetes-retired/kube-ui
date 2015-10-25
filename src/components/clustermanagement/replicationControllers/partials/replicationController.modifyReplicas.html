@@ -1,0 +1,32 @@
+  <form class="form-horizontal animated" name="ctrl.modifyReplicasCountForm" ng-submit="ctrl.save()">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-cubes"></i> Change Replicas Count for "{{ ctrl.replicationController.metadata.name }}"</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group form-group-lg" ng-if="ctrl.saveSuccess == null">
+            <label class="control-label col-sm-3" for="desiredCount">Desired Count:</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" name="desiredCount" ng-model="ctrl.replicas" min="1" />
+            </div>
+          </div>
+          <k8s-loading promise="ctrl.replicationControllerPromise"></k8s-loading>
+          <div class="animated flipInX" ng-if="ctrl.saveSuccess === true || ctrl.saveSucess === false">
+            <div class="alert alert-success" ng-if="ctrl.saveSuccess === true">
+              Desired count saved successfully.
+            </div>
+            <div class="alert alert-success" ng-if="ctrl.saveSuccess === false">
+              Error saving desired count.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()" ng-bind="ctrl.saveSuccess === null ? 'Cancel' : 'Close'">Cancel</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="ctrl.modifyReplicasCountForm.$pristine || ctrl.saveInProgress === true" ng-if="ctrl.saveSuccess == null">Save</button>
+  </div>
+</form>

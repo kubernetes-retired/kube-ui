@@ -1,6 +1,7 @@
 angular.module('k8s.components.clustermanagement', [
-	'k8s.sdk',
-	'k8s.components.clustermanagement.pods'
+  'k8s.sdk',
+  'k8s.components.clustermanagement.pods',
+  'k8s.components.clustermanagement.replicationControllers'
 ]);
 
 angular.module('k8s.components.clustermanagement')

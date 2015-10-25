@@ -1,0 +1,20 @@
+  <form class="form-horizontal animated" name="ctrl.modifyReplicasCountForm" ng-submit="ctrl.save()">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-cubes"></i> Delete "{{ ctrl.replicationController.metadata.name }}" Replication Controller</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <strong>Are you sure you want to delete the Replication Controller "{{ ctrl.replicationController.metadata.name }}"?</strong>
+
+          <k8s-loading promise="ctrl.replicationControllerPromise"></k8s-loading>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">Abort</button>
+    <button type="button" ng-click="ctrl.deleteRc()" class="btn btn-danger" ng-disabled="ctrl.deleteInProgress === true" ng-if="ctrl.saveSuccess == null"><i class="fa fa-trash fa-fw"></i> Yes</button>
+  </div>
+</form>

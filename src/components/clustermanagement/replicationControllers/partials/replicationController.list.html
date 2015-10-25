@@ -1,0 +1,71 @@
+<div class="k8s-rc-form">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-heading">
+        <h2 class="page-title"><i class="fa fa-cubes fa-fw"></i> Replication Controllers</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      
+      <div class="k8s-bordered-box" st-table="displayedRcs" st-safe-src="ctrl.replicationControllers">
+        <div class="k8s-bordered-box-body">
+          <div class="alert alert-info" ng-if="ctrl.replicationControllers.length < 1">
+            No Replication Controllers available.
+          </div>
+          <table class="table table-striped" ng-show="ctrl.replicationControllers.length > 0">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Containers (Name/Image)</th>
+                <th>Selector</th>
+                <th>Replicas <br />actual/desired state</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="rc in displayedRcs track by $index">
+                <td style="vertical-align: middle">
+                  <div class="btn-group" uib-dropdown is-open="status.isopen">
+                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                      <i class="fa fa-cog"></i>
+                    </button>
+                    <ul class="uib-dropdown-menu fa-ul" role="menu" aria-labelledby="single-button">
+                      <li role="menuitem"><a href="#" ng-click="$event.preventDefault(); ctrl.modifyReplicas(rc)"><i class="fa fa-fw  fa-arrows-v"></i> Change Replicas Count</a></li>
+                      <li class="divider"></li>
+                      <li role="menuitem"><a href="#" ng-click="$event.preventDefault(); ctrl.deleteRc(rc)" class="text-danger"><i class="fa fa-fw fa-trash-o"></i> Delete Replication Controller</a></li>
+                    </ul>
+                  </div>
+                </td>
+                <td style="padding-top: 20px;">
+                  <strong ng-bind="rc.metadata.name"></strong>
+                </td>
+                <td>
+                  <ul class="list-unstyled fa-ul">
+                    <li ng-repeat="container in rc.spec.template.spec.containers track by container.name">
+                      <i class="fa fa-li fa-caret-right"></i> 
+                      {{ container.name }}<br />
+                      {{ container.image }}
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <k8s-label-view labels="rc.spec.selector"></k8s-label-view>
+                </td>
+                <td style="padding-top: 18px; font-size: 15px;">
+                  <span style="font-size: 15px;" class="label" ng-class="{'label-success': rc.status.replicas === rc.spec.replicas, 'label-danger': rc.status.replicas !== rc.spec.replicas}">{{ rc.status.replicas }} / {{ rc.spec.replicas }}</span>
+                </td>
+                <td style="padding-top: 20px;">
+                  {{ rc.metadata.creationTimestamp | date:'mediumDate' }} {{ rc.metadata.creationTimestamp | date:'mediumTime' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <k8s-pagination></k8s-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
