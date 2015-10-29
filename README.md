@@ -1,6 +1,10 @@
 
 Join the UI discussion at: https://groups.google.com/forum/#!forum/kubernetes-sig-ui
 
+Also please check out the new Dashboard for Kubernetes available at: https://github.com/kubernetes/dashboard
+
+This codebase will be retired once the new and improved Dashboard is production ready.
+
 # Working with the Kubernetes UI
 This document explains how to work with the Kubernetes UI. For information on how to access and use it, see [docs/ui.md](docs/ui.md).
 
