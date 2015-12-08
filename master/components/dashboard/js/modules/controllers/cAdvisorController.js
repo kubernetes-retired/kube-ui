@@ -22,7 +22,11 @@ app.controller('cAdvisorController', [
         $scope.minions = res;
 
         var promises = lodash.map(res.items, function(m) {
-            return cAdvisorService.getDataForMinion(m.metadata.name, (m.status.conditions[0].status === 'True'));
+            var readyCondition = m.status.conditions.filter(function ( obj ) {
+                return obj.type === 'Ready';
+            })[0];
+
+            return cAdvisorService.getDataForMinion(m.metadata.name, readyCondition && readyCondition.status === 'True');
           });
         $q.all(promises).then(
             function(dataArray) {
