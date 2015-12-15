@@ -56,7 +56,11 @@ app.controller('ListMinionsCtrl', [
 
           if (minion.status.conditions) {
             Object.keys(minion.status.conditions)
-                .forEach(function(key) { _statusType += minion.status.conditions[key].type; });
+                .forEach(function(key) {
+                  if (minion.status.conditions[key].status == 'True') {
+                    _statusType += minion.status.conditions[key].type;
+                  }
+                });
           }
 
 
