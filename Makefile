@@ -5,7 +5,7 @@
 .PHONY: all bindata container push clean
 
 # Keep this at dev, so no one accidentally blows away the latest published version.
-TAG = v3 # current version: v3
+TAG = v4 # current version: v4
 PREFIX = gcr.io/google_containers
 
 all: push
