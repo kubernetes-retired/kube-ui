@@ -26,11 +26,17 @@ app.controller('cAdvisorController', [
                 return obj.type === 'Ready';
             })[0];
 
-            return cAdvisorService.getDataForMinion(m.metadata.name, readyCondition && readyCondition.status === 'True');
-          });
+            return cAdvisorService.getDataForMinion(m.metadata.name, readyCondition && readyCondition.status === 'True')
+              .catch(function(errorData) {
+                // don't fail the whole promise chain just because one node failed
+                return null;
+              });
+        });
         $q.all(promises).then(
             function(dataArray) {
               lodash.each(dataArray, function(data, i) {
+                if (!data) return; // ignore errornous nodes
+
                 var m = res.items[i];
 
                 var maxData = maxMemCpuInfo(m.metadata.name, data.memoryData, data.cpuData, data.filesystemData);
