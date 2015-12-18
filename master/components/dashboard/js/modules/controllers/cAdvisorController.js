@@ -37,9 +37,12 @@ app.controller('cAdvisorController', [
 
                 if(m.status.addresses)
                   hostname = m.status.addresses[0].address;
+                else
+                  hostname = m.metadata.name;
 
+                cpu = m.status.capacity ? m.status.capacity.cpu : '-';
                 $scope.activeMinionDataById[m.metadata.name] =
-                    transformMemCpuInfo(data.memoryData, data.cpuData, data.filesystemData, maxData, hostname, m.status.capacity.cpu);
+                    transformMemCpuInfo(data.memoryData, data.cpuData, data.filesystemData, maxData, hostname, cpu);
               });
 
             },

@@ -72,12 +72,11 @@
             deferred.resolve({
               memoryData: {
                 current: {
-                    memoryUsage: '',
-                    memoryLimit: ''
+                    memoryUsage: 0, workingMemoryUsage: 0, memoryLimit: 1.0, memoryUsageDescription: "-", memoryLimitDescription: "-"
                 },
                 historical: {}
               },
-              cpuData: { cpuPercentUsage: 0 },
+              cpuData: { cpuPercentUsage: '' },
               filesystemData: [],
               machineData: {},
               containerData: {}
