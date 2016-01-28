@@ -1,5 +1,5 @@
 /*
-Copyright 2015 The Kubernetes Authors All rights reserved.
+Copyright 2016 The Kubernetes Authors All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -450,7 +450,7 @@ func appAssetsJsAppJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "app/assets/js/app.js", size: 43468, mode: os.FileMode(420), modTime: time.Unix(1450202755, 0)}
+	info := bindataFileInfo{name: "app/assets/js/app.js", size: 43468, mode: os.FileMode(416), modTime: time.Unix(1454014512, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -491,7 +491,7 @@ func appAssetsJsBaseJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "app/assets/js/base.js", size: 477099, mode: os.FileMode(420), modTime: time.Unix(1450202735, 0)}
+	info := bindataFileInfo{name: "app/assets/js/base.js", size: 477099, mode: os.FileMode(416), modTime: time.Unix(1454014512, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -1868,7 +1868,7 @@ func appVendorD3D3MinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "app/vendor/d3/d3.min.js", size: 151123, mode: os.FileMode(420), modTime: time.Unix(1450202754, 0)}
+	info := bindataFileInfo{name: "app/vendor/d3/d3.min.js", size: 151123, mode: os.FileMode(416), modTime: time.Unix(1454014512, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
