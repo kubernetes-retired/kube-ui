@@ -37,8 +37,81 @@
 
                  api.getPods = function(query, namespace) { return _get($http, api.getNamespacedUrlBase(namespace) + '/pods', query); };
 
-                 api.getNodes = function(query) { return _get($http, urlBase + '/nodes', query); };
-
+                 /**
+                 GetNodes() according to the definitions here:
+                 http://kubernetes.io/v1.1/docs/api-reference/v1/operations.html#_list_or_watch_objects_of_kind_node
+                 */
+                 api.getNodes = function(query) {
+                     var ob = {
+                         "success": function(callback) {
+                             callback({
+                                  "items": [
+                                     {
+                                         "status": {
+                                             "conditions": [{"type": "Ready", "status": "True"}],
+                                             "capacity": {
+                                                 "cpu": 8,
+                                             },
+                                             "addresses": [{"address":"147.102.5.5"}],
+                                         },
+                                         "metadata": {
+                                             "name": "n1",
+                                             "namespace": "ns",
+                                             "labels": {"color": "red", "taste": "sour"}
+                                         }
+                                     },
+                                     {
+                                         "status": {
+                                             "conditions": [{"type": "Ready", "status": "True"}],
+                                             "capacity": {
+                                                 "cpu": 12,
+                                             }
+                                         },
+                                         "metadata": {
+                                             "name": "n2",
+                                             "namespace": "ns",
+                                             "labels": {"color": "blue", "taste": "sweet"}
+                                         }
+                                     },
+                                      {
+                                          "status": {
+                                              "conditions": [{"type": "Ready", "status": "True"}],
+                                              "capacity": {
+                                                  "cpu": 12,
+                                              }
+                                          },
+                                          "metadata": {
+                                              "name": "n3",
+                                              "namespace": "ns",
+                                              "labels": {"color": "blue", "taste": "sweet"}
+                                          }
+                                      },
+                                       {
+                                           "status": {
+                                               "conditions": [{"type": "Ready", "status": "True"}],
+                                               "capacity": {
+                                                   "cpu": 12,
+                                               }
+                                           },
+                                           "metadata": {
+                                               "name": "n4",
+                                               "namespace": "ns",
+                                               "labels": {"color": "blue", "taste": "sweet"}
+                                           }
+                                       }
+                                  ]
+                              });
+                              return ob;
+                         },
+                         "finally": function(callback) {
+                             callback();
+                             return ob;
+                         }
+                     }
+                     return ob;
+                     //return _get($http, urlBase + '/nodes', query);
+                 };
+                 
                  api.getMinions = api.getNodes;
 
                  api.getServices = function(query, namespace) { return _get($http, api.getNamespacedUrlBase(namespace) + '/services', query); };

@@ -3,6 +3,9 @@
 
   angular.module('kubernetesApp.services')
       .service('cAdvisorService', function($http, $q, ENV, k8sApi) {
+          
+        // See cAdvisor definitions here: http://kubernetes.io/v1.1/docs/user-guide/monitoring.html#cadvisor
+          
         var _baseUrl = function(minionIp) {
           var minionPort = ENV['/']['cAdvisorPort'] || "8081";
           var proxy = ENV['/']['cAdvisorProxy'] || (k8sApi.getUrlBase() + "/proxy/nodes/");
@@ -12,14 +15,25 @@
 
         this.getMachineInfo = getMachineInfo;
 
+        var gb = Math.pow(1024, 3);
+
         function getMachineInfo(minionIp) {
           var fullUrl = _baseUrl(minionIp) + 'machine';
           var deferred = $q.defer();
 
           // hack
-          $http.get(fullUrl).success(function(data) {
-            deferred.resolve(data);
-          }).error(function(data, status) { deferred.reject('There was an error') });
+          // $http.get(fullUrl).success(function(data) {
+          //   deferred.resolve(data);
+          // }).error(function(data, status) { deferred.reject('There was an error') });
+          
+          deferred.resolve({
+              // Machine Info
+              // According to the definitions here:
+              // https://github.com/google/cadvisor/blob/1f6f660745e2d4632506df6cb30d0bb55fe18a4d/info/v1/machine.go#L131
+              memory_capacity: 23*gb,
+              num_cores: 4
+          });
+          
           return deferred.promise;
         }
 
@@ -36,9 +50,44 @@
             "num_samples": 0
           };
 
-          $http.post(fullUrl, request)
-              .success(function(data) { deferred.resolve(data); })
-              .error(function() { deferred.reject('There was an error') });
+          // $http.post(fullUrl, request)
+          //     .success(function(data) { deferred.resolve(data); })
+          //     .error(function() { deferred.reject('There was an error') });
+
+          var data = {
+                // Container Info
+                // According to the definitions here:
+                // https://github.com/google/cadvisor/blob/6639697283636035db63ac3463aa07ffab15c312/manager/manager.go#L448
+
+                spec: {
+                    has_memory: true,
+                    has_cpu: true,
+                    memory: { limit: 25*gb }
+                },
+                stats: [],    
+            };
+            
+          var now = new Date();
+          var cpu_0 = 0;
+          
+          for (var i = 0; i < 3; ++i) {
+              data.stats.push(
+              {
+                  timestamp: now.toISOString(),
+                  memory: { usage: (16 + (Math.random()*4))*gb, working_set: 10*gb },
+                  cpu: { usage: {total: cpu_0 } },
+                  "filesystem": [
+                    { "usage": (400 + (Math.random()*140))*gb, "capacity": 900*gb, "device": "hda0" },
+                    { "usage": (250 + (Math.random()*130))*gb, "capacity": 640*gb, "device": "hda0" },
+                  ]
+              }
+              );
+              now.setMilliseconds(now.getMilliseconds() + 1);
+              cpu_0 += (16 + ((Math.random()-0.5)*30)) * 100000;
+          }
+          
+          deferred.resolve(data);
+
           return deferred.promise;
         }
 
