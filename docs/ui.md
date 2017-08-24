@@ -4,7 +4,7 @@
 Kubernetes has an extensible user interface with default functionality that describes the current cluster. See the [README](../README.md) for more information.
 
 ### Running locally
-Assuming that you have a cluster running locally at `localhost:8080`, as described [here](https://github.com/kubernetes/kubernetes/blob/master/docs/getting-started-guides/locally.md), you can run the UI against it with kubectl:
+Assuming that you have a cluster running locally at `localhost:8080`, as described [here](https://github.com/kubernetes/community/blob/master/contributors/devel/running-locally.md), you can run the UI against it with kubectl:
 
 ```sh
 kubectl proxy --www=<kube-ui home>/app --www-prefix=/
