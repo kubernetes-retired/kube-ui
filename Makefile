@@ -6,7 +6,7 @@
 
 # Keep this at dev, so no one accidentally blows away the latest published version.
 TAG = dev # current version: v5
-PREFIX = gcr.io/google_containers
+PREFIX = staging-k8s.gcr.io
 
 all: push
 
