@@ -144,7 +144,7 @@
           if (!cur.filesystem) {
             return;
           }
-
+          
           var filesystemData = [];
           for (var i = 0; i < cur.filesystem.length; i++) {
             var data = cur.filesystem[i];
@@ -162,6 +162,11 @@
 
             filesystemData.push(f);
           }
+          filesystemData.sort(function(a, b) {
+            var str1 = a.device;
+            var str2 = b.device;
+            return ( ( str1 == str2 ) ? 0 : ( ( str1 > str2 ) ? 1 : -1 ) );
+          });
           return filesystemData;
         }
 
